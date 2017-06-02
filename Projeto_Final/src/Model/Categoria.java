@@ -9,6 +9,7 @@ public class Categoria {
     private int id;
     private String descricao;
     private Boolean ativo;
+    
 
     public int getId() {
         return id;
