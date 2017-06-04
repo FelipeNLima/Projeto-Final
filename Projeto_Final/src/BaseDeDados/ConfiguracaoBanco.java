@@ -1,7 +1,7 @@
 package BaseDeDados;
 
 /*
- ** Desenvolvido por..: wesley
+ ** Desenvolvido por..: Wesley
  ** Data..............: 04/06/2017  
  */
 
