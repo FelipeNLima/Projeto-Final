@@ -14,6 +14,7 @@ public class Cargo implements CadastroInterface {
     private String descricao;
     private Boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="CTOR">  
     public Cargo() {
         ativo = true;
     }
@@ -22,6 +23,7 @@ public class Cargo implements CadastroInterface {
         this.descricao = descricao;
         this.ativo = true;
     }
+    // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public void setId(int id) {

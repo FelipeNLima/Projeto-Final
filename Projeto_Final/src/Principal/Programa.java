@@ -6,8 +6,12 @@
 public class Programa {
 
     public static void main(String[] args) {
-//        Cargo cargo = new Cargo("DENTISTA");
-//       cargo.inserir();
+//        Cargo cargo = new Cargo("DESENVOLVEDOR");
+//        cargo.inserir();
+
+////        Cargo cargo = new Cargo();
+////        cargo.carregarPorId(1);
+////        cargo.remover();
 
 //        Cargo cargo = new Cargo();
 //        cargo.carregarPorId(11);
