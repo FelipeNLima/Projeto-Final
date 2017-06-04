@@ -9,7 +9,6 @@ public class Categoria {
     private int id;
     private String descricao;
     private Boolean ativo;
-    
 
     public int getId() {
         return id;
@@ -34,7 +33,4 @@ public class Categoria {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-    
-    
-
 }

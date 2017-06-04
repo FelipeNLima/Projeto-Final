@@ -60,11 +60,4 @@ public class Diagnostico {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-    
-    
-
-   
-    
-    
-
 }
