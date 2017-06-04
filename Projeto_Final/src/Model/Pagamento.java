@@ -5,12 +5,12 @@ import java.util.Date;
 /*
  ** Desenvolvido por..: Felipe
  ** Data..............: 01/06/2017  
-*/
+ */
 public class Pagamento {
-    
+
     private int id;
     private Date data;
-    private Double valor;
+    private double valor;
     private Boolean ativo;
 
     public int getId() {
@@ -29,7 +29,7 @@ public class Pagamento {
         this.data = data;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
@@ -44,7 +44,4 @@ public class Pagamento {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-    
-    
-
 }

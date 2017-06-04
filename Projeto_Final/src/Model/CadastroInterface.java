@@ -4,7 +4,6 @@ package Model;
  ** Desenvolvido por..: Wesley
  ** Data..............: 01/06/2017  
  */
-
 public interface CadastroInterface {
 
     public void inserir();

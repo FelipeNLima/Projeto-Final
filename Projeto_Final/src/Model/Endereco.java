@@ -82,6 +82,7 @@ public class Endereco implements CadastroInterface {
     }
 
     // </editor-fold> 
+    
     @Override
     public void inserir() {
     }

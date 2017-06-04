@@ -24,10 +24,7 @@ public class Funcionario extends Pessoa{
         return dataDeAdmissao;
     }
 
-    public void setData_de_admissao(Date dataDeAdmissao) {
+    public void setDataDeAdmissao(Date dataDeAdmissao) {
         this.dataDeAdmissao = dataDeAdmissao;
     }
-    
-    
-
 }

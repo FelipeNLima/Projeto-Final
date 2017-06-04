@@ -5,17 +5,17 @@ import java.util.Date;
 /*
  ** Desenvolvido por..: Felipe
  ** Data..............: 01/06/2017  
-*/
+ */
 public abstract class Pessoa {
-    
+
     private int id;
-    private String  nome;
-    private String  cpf;
-    private String  genero;
-    private Date    dataDeNascimento;
-    private String  celular;
-    private String  telefone;
-    private String  email;
+    private String nome;
+    private String cpf;
+    private String genero;
+    private Date dataDeNascimento;
+    private String celular;
+    private String telefone;
+    private String email;
     private Boolean ativo;
 
     public int getId() {
@@ -33,7 +33,7 @@ public abstract class Pessoa {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-            
+
     public String getNome() {
         return nome;
     }
@@ -97,8 +97,4 @@ public abstract class Pessoa {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
-    
-    
-
 }

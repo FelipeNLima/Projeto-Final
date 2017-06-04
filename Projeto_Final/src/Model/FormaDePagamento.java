@@ -37,6 +37,7 @@ public class FormaDePagamento implements CadastroInterface {
     }
 
     // </editor-fold> 
+
     @Override
     public void inserir() {
     }

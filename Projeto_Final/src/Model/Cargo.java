@@ -5,7 +5,7 @@ import Model.CadastroInterface;
 import java.sql.SQLException;
 
 /*
- ** Desenvolvido por..: wesley
+ ** Desenvolvido por..: Wesley
  ** Data..............: 01/06/2017  
  */
 public class Cargo implements CadastroInterface {
@@ -15,7 +15,7 @@ public class Cargo implements CadastroInterface {
     private Boolean ativo;
 
     public Cargo() {
-
+        ativo = true;
     }
 
     public Cargo(String descricao) {
@@ -49,6 +49,7 @@ public class Cargo implements CadastroInterface {
     }
     // </editor-fold> 
 
+    // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
         try {
@@ -127,4 +128,5 @@ public class Cargo implements CadastroInterface {
             System.out.println(ex.toString());
         }
     }
+    // </editor-fold> 
 }
