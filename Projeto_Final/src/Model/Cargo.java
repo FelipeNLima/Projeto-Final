@@ -77,10 +77,10 @@ public class Cargo implements CadastroInterface {
     public void atualizar() {
         try {
             String query = "UPDATE cargos SET   "
-                         + "	descricao  = ?, "
-                         + "	ativo	   = ?  "
-                         + "WHERE               "
-                         + "	id_cargo   = ?  ";
+                    + "	descricao  = ?, "
+                    + "	ativo	   = ?  "
+                    + "WHERE               "
+                    + "	id_cargo   = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
