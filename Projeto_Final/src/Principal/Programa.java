@@ -1,5 +1,6 @@
-public class Programa {
 
+public class Programa {
+    
     public static void main(String[] args) {
 //        Cargo cargo = new Cargo("DESENVOLVEDOR");
 //        cargo.inserir();
@@ -19,5 +20,7 @@ public class Programa {
 //        Model.Categoria categoria = new Categoria("ZOIO MAIS OU MENOS");
         //       categoria.inserir();
         //      System.out.println(categoria.getId());
+        
+        new Telas.frmPrincipal().setVisible(true);
     }
 }
