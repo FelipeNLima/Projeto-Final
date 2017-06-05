@@ -2,10 +2,6 @@ package BaseDeDados;
 
 import java.sql.*;
 
-/*
- ** Desenvolvido por..: Wesley
- ** Data..............: 02/06/2017  
- */
 public class Banco {
 
     public static PreparedStatement cmd;

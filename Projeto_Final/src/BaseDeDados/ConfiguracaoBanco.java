@@ -1,9 +1,5 @@
 package BaseDeDados;
 
-/*
- ** Desenvolvido por..: Wesley
- ** Data..............: 04/06/2017  
- */
 public class ConfiguracaoBanco {
 
     private static final String servidor = "localhost";
