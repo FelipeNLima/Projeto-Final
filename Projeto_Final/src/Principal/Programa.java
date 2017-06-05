@@ -1,6 +1,9 @@
 
+import Modelos.Categoria;
+import Modelos.Diagnostico;
+
 public class Programa {
-    
+
     public static void main(String[] args) {
 //        Cargo cargo = new Cargo("DESENVOLVEDOR");
 //        cargo.inserir();
@@ -20,7 +23,23 @@ public class Programa {
 //        Model.Categoria categoria = new Categoria("ZOIO MAIS OU MENOS");
         //       categoria.inserir();
         //      System.out.println(categoria.getId());
+        Diagnostico diag = new Diagnostico();
+        diag.setEsferico(1);
+        diag.setCilindro(2);
+        diag.setAdicao(3);
+        diag.setEixo(4);
         
-        new Telas.frmPrincipal().setVisible(true);
+//        Categoria cat = new Categoria();
+//        cat.carregarPorId(1);
+//        
+//        diag.setCategoria(cat);
+//        
+//        //diag.inserir();
+//
+//        diag.carregarPorId(1);
+//        diag.setAtivo(true);
+//        diag.atualizar();
+        
+        //new Telas.frmPrincipal().setVisible(true);
     }
 }

@@ -8,7 +8,7 @@ public class Consulta implements CadastroInterface {
     private int id;
     private Date data;
     private Time horario;
-    private Double valor;
+    private double valor;
     private String status;
     private boolean ativo;
 
@@ -37,11 +37,11 @@ public class Consulta implements CadastroInterface {
         this.horario = horario;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
@@ -57,11 +57,12 @@ public class Consulta implements CadastroInterface {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
     //</editor-fold>
+
     @Override
     public void inserir() {
     }
