@@ -3,7 +3,7 @@ package Modelos;
 import java.sql.Time;
 import java.util.Date;
 
-public class Consulta {
+public class Consulta implements CadastroInterface {
 
     private int id;
     private Date data;
@@ -62,4 +62,32 @@ public class Consulta {
     }
 
     //</editor-fold>
+    @Override
+    public void inserir() {
+    }
+
+    @Override
+    public void atualizar() {
+    }
+
+    @Override
+    public void remover() {
+    }
+
+    @Override
+    public void carregarPorId(int id) {
+    }
+
+    public static void trocar(Consulta consultaA, Consulta consultaB) {
+        Consulta consultaTemp = consultaA;
+
+        consultaA.setData(consultaB.getData());
+        consultaA.setHorario(consultaB.getHorario());
+
+        consultaB.setData(consultaTemp.getData());
+        consultaB.setHorario(consultaTemp.getHorario());
+
+        consultaA.atualizar();
+        consultaB.atualizar();
+    }
 }
