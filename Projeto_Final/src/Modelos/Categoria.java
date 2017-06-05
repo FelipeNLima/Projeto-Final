@@ -1,4 +1,4 @@
-package Model;
+package Modelos;
 
 import BaseDeDados.Banco;
 import Validacoes.Excecoes;

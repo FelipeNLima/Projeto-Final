@@ -1,5 +1,5 @@
 
-import Model.Categoria;
+import Modelos.Categoria;
 
 /*
  ** Desenvolvido por..: wesley

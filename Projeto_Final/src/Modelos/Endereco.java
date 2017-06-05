@@ -1,5 +1,7 @@
+package Modelos;
 
-import Model.CadastroInterface;
+
+import Modelos.CadastroInterface;
 
 /*
  ** Desenvolvido por..: Wesley

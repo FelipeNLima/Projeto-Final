@@ -1,7 +1,9 @@
+package Modelos;
+
 
 import Validacoes.Excecoes;
 import BaseDeDados.Banco;
-import Model.CadastroInterface;
+import Modelos.CadastroInterface;
 import java.sql.SQLException;
 
 /*

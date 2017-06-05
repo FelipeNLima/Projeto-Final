@@ -1,15 +1,16 @@
+package Modelos;
 
-import Model.CadastroInterface;
+
+import Modelos.CadastroInterface;
 
 /*
- ** Desenvolvido por..: wesley
+ ** Desenvolvido por..: Wesley
  ** Data..............: 01/06/2017  
  */
-public class Login implements CadastroInterface {
+public class FormaDePagamento implements CadastroInterface {
 
     private int id;
-    private String usuario;
-    private String senha;
+    private String descricao;
     private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
@@ -17,12 +18,8 @@ public class Login implements CadastroInterface {
         return id;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getSenha() {
-        return senha;
+    public String getDescricao() {
+        return descricao;
     }
 
     public boolean getAtivo() {
@@ -33,12 +30,8 @@ public class Login implements CadastroInterface {
         this.id = id;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public void setAtivo(boolean ativo) {
@@ -46,7 +39,7 @@ public class Login implements CadastroInterface {
     }
 
     // </editor-fold> 
-   
+
     @Override
     public void inserir() {
     }
@@ -61,10 +54,5 @@ public class Login implements CadastroInterface {
 
     @Override
     public void carregarPorId(int id) {
-    
-    }
-    
-    public static boolean validar(String usuario, String senha){
-        return true;
     }
 }
