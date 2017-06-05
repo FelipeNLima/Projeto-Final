@@ -4,10 +4,6 @@ import BaseDeDados.Banco;
 import Validacoes.Excecoes;
 import java.sql.SQLException;
 
-/*
- ** Desenvolvido por..: Felipe
- ** Data..............: 01/06/2017  
- */
 public class Categoria implements CadastroInterface {
 
     private int id;

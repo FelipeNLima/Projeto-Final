@@ -1,11 +1,20 @@
 package Modelos;
 
-/*
- ** Desenvolvido por..: Felipe
- ** Data..............: 01/06/2017  
-*/
-public class Cliente extends Pessoa{
-    
-   
+public class Cliente extends Pessoa {
 
+    @Override
+    public void inserir() {
+    }
+
+    @Override
+    public void atualizar() {
+    }
+
+    @Override
+    public void remover() {
+    }
+
+    @Override
+    public void carregarPorId(int id) {
+    }
 }

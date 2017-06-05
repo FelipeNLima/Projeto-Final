@@ -2,11 +2,7 @@ package Modelos;
 
 import java.util.Date;
 
-/*
- ** Desenvolvido por..: Felipe
- ** Data..............: 01/06/2017  
- */
-public abstract class Pessoa {
+public abstract class Pessoa  implements CadastroInterface{
 
     protected int id;
     protected String nome;

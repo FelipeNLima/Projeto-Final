@@ -2,10 +2,6 @@ package Modelos;
 
 import java.util.Date;
 
-/*
- ** Desenvolvido por..: Felipe
- ** Data..............: 01/06/2017  
- */
 public class Pagamento {
 
     private int id;

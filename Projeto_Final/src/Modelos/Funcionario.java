@@ -2,10 +2,6 @@ package Modelos;
 
 import java.util.Date;
 
-/*
- ** Desenvolvido por..: Felipe
- ** Data..............: 01/06/2017  
- */
 public class Funcionario extends Pessoa {
 
     private double salario;
@@ -29,4 +25,20 @@ public class Funcionario extends Pessoa {
     }
 
     // </editor-fold>
+
+    @Override
+    public void inserir() {
+    }
+
+    @Override
+    public void atualizar() {
+    }
+
+    @Override
+    public void remover() {
+    }
+
+    @Override
+    public void carregarPorId(int id) {
+    }
 }

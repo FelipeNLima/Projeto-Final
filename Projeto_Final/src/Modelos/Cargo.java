@@ -1,15 +1,9 @@
 package Modelos;
 
-
 import Validacoes.Excecoes;
 import BaseDeDados.Banco;
-import Modelos.CadastroInterface;
 import java.sql.SQLException;
 
-/*
- ** Desenvolvido por..: Wesley
- ** Data..............: 01/06/2017  
- */
 public class Cargo implements CadastroInterface {
 
     private int id;
@@ -58,10 +52,10 @@ public class Cargo implements CadastroInterface {
     public void inserir() {
         try {
             String query = "INSERT INTO cargos         "
-                         + "	(descricao, ativo)     "
-                         + "OUTPUT inserted.id_cargo   "
-                         + "VALUES                     "
-                         + "	(? , ?)";
+                    + "	(descricao, ativo)     "
+                    + "OUTPUT inserted.id_cargo   "
+                    + "VALUES                     "
+                    + "	(? , ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -82,10 +76,10 @@ public class Cargo implements CadastroInterface {
     public void atualizar() {
         try {
             String query = "UPDATE cargos SET   "
-                         + "	descricao  = ?, "
-                         + "	ativo	   = ?  "
-                         + "WHERE               "
-                         + "	id_cargo   = ?  ";
+                    + "	descricao  = ?, "
+                    + "	ativo	   = ?  "
+                    + "WHERE               "
+                    + "	id_cargo   = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -110,12 +104,12 @@ public class Cargo implements CadastroInterface {
 
         try {
             String query = "SELECT          "
-                         + "	descricao,  "
-                         + "	ativo       "
-                         + "FROM	    "
-                         + "	cargos      "
-                         + "WHERE           "
-                         + "	id_cargo = ?";
+                    + "	descricao,  "
+                    + "	ativo       "
+                    + "FROM	    "
+                    + "	cargos      "
+                    + "WHERE           "
+                    + "	id_cargo = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);

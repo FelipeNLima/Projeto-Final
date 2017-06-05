@@ -3,12 +3,8 @@ package Modelos;
 import java.sql.Time;
 import java.util.Date;
 
-/*
- ** Desenvolvido por..: Felipe
- ** Data..............: 01/06/2017  
-*/
 public class Consulta {
-    
+
     private int id;
     private Date data;
     private Time horario;

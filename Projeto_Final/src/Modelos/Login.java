@@ -1,12 +1,5 @@
 package Modelos;
 
-
-import Modelos.CadastroInterface;
-
-/*
- ** Desenvolvido por..: wesley
- ** Data..............: 01/06/2017  
- */
 public class Login implements CadastroInterface {
 
     private int id;

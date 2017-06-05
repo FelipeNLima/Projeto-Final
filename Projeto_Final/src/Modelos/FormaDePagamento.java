@@ -1,12 +1,5 @@
 package Modelos;
 
-
-import Modelos.CadastroInterface;
-
-/*
- ** Desenvolvido por..: Wesley
- ** Data..............: 01/06/2017  
- */
 public class FormaDePagamento implements CadastroInterface {
 
     private int id;
@@ -39,7 +32,7 @@ public class FormaDePagamento implements CadastroInterface {
     }
 
     // </editor-fold> 
-
+    
     @Override
     public void inserir() {
     }
