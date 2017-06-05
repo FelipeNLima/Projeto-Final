@@ -1,8 +1,10 @@
+
+import Model.Categoria;
+
 /*
  ** Desenvolvido por..: wesley
  ** Data..............: 04/06/2017  
  */
-
 public class Programa {
 
     public static void main(String[] args) {
@@ -12,7 +14,6 @@ public class Programa {
 ////        Cargo cargo = new Cargo();
 ////        cargo.carregarPorId(1);
 ////        cargo.remover();
-
 //        Cargo cargo = new Cargo();
 //        cargo.carregarPorId(11);
 //        cargo.setDescricao("ALFA");
@@ -22,5 +23,8 @@ public class Programa {
 //        cargo.remover();
 //
 //        System.out.println(cargo.getDescricao() + "\n" + cargo.getId());
+//        Model.Categoria categoria = new Categoria("ZOIO MAIS OU MENOS");
+        //       categoria.inserir();
+        //      System.out.println(categoria.getId());
     }
 }

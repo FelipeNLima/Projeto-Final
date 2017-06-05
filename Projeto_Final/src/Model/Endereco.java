@@ -14,7 +14,7 @@ public class Endereco implements CadastroInterface {
     private String logradouro;
     private String numero;
     private String complemento;
-    private Boolean ativo;
+    private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
@@ -45,7 +45,7 @@ public class Endereco implements CadastroInterface {
         return complemento;
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
@@ -77,7 +77,7 @@ public class Endereco implements CadastroInterface {
         this.complemento = complemento;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 

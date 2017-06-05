@@ -14,8 +14,9 @@ public class Consulta {
     private Time horario;
     private Double valor;
     private String status;
-    private Boolean ativo;
+    private boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
     }
@@ -63,4 +64,6 @@ public class Consulta {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+
+    //</editor-fold>
 }

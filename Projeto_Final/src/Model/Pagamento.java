@@ -11,8 +11,9 @@ public class Pagamento {
     private int id;
     private Date data;
     private double valor;
-    private Boolean ativo;
+    private boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
     }
@@ -37,11 +38,13 @@ public class Pagamento {
         this.valor = valor;
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+    
+    // </editor-fold>
 }

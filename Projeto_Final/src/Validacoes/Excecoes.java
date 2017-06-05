@@ -1,5 +1,7 @@
 package Validacoes;
 
+import javax.swing.JOptionPane;
+
 /*
  ** Desenvolvido por..: wesley
  ** Data..............: 04/06/2017  
@@ -7,6 +9,6 @@ package Validacoes;
 public class Excecoes {
 
     public static void mostrarExcecoes(Exception ex) {
-        System.out.println(ex.toString());
+	JOptionPane.showMessageDialog(null, ex.toString(), "Exceção",JOptionPane.ERROR_MESSAGE);
     }
 }

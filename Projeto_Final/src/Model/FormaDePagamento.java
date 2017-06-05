@@ -9,7 +9,7 @@ public class FormaDePagamento implements CadastroInterface {
 
     private int id;
     private String descricao;
-    private Boolean ativo;
+    private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
@@ -20,7 +20,7 @@ public class FormaDePagamento implements CadastroInterface {
         return descricao;
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
@@ -32,7 +32,7 @@ public class FormaDePagamento implements CadastroInterface {
         this.descricao = descricao;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 

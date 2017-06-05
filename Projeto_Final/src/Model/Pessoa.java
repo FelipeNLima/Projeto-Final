@@ -8,16 +8,18 @@ import java.util.Date;
  */
 public abstract class Pessoa {
 
-    private int id;
-    private String nome;
-    private String cpf;
-    private String genero;
-    private Date dataDeNascimento;
-    private String celular;
-    private String telefone;
-    private String email;
-    private Boolean ativo;
+    protected int id;
+    protected String nome;
+    protected String cpf;
+    protected String genero;
+    protected Date dataDeNascimento;
+    protected String celular;
+    protected String telefone;
+    protected String email;
+    protected boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
+    
     public int getId() {
         return id;
     }
@@ -26,14 +28,14 @@ public abstract class Pessoa {
         this.id = id;
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-
+    
     public String getNome() {
         return nome;
     }
@@ -89,12 +91,5 @@ public abstract class Pessoa {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
+    // </editor-fold>
 }

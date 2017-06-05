@@ -10,7 +10,7 @@ public class Login implements CadastroInterface {
     private int id;
     private String usuario;
     private String senha;
-    private Boolean ativo;
+    private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
@@ -25,7 +25,7 @@ public class Login implements CadastroInterface {
         return senha;
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
@@ -41,7 +41,7 @@ public class Login implements CadastroInterface {
         this.senha = senha;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
@@ -61,5 +61,10 @@ public class Login implements CadastroInterface {
 
     @Override
     public void carregarPorId(int id) {
+    
+    }
+    
+    public static boolean validar(String usuario, String senha){
+        return true;
     }
 }

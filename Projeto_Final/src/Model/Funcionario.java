@@ -5,13 +5,13 @@ import java.util.Date;
 /*
  ** Desenvolvido por..: Felipe
  ** Data..............: 01/06/2017  
-*/
-public class Funcionario extends Pessoa{
-    
-    private Double salario;
-    private Date dataDeAdmissao;
-    
+ */
+public class Funcionario extends Pessoa {
 
+    private double salario;
+    private Date dataDeAdmissao;
+
+    // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public double getSalario() {
         return salario;
     }
@@ -27,4 +27,6 @@ public class Funcionario extends Pessoa{
     public void setDataDeAdmissao(Date dataDeAdmissao) {
         this.dataDeAdmissao = dataDeAdmissao;
     }
+
+    // </editor-fold>
 }
