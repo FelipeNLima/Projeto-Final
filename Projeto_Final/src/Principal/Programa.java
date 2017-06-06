@@ -23,11 +23,11 @@ public class Programa {
 //        Model.Categoria categoria = new Categoria("ZOIO MAIS OU MENOS");
         //       categoria.inserir();
         //      System.out.println(categoria.getId());
-        Diagnostico diag = new Diagnostico();
-        diag.setEsferico(1);
-        diag.setCilindro(2);
-        diag.setAdicao(3);
-        diag.setEixo(4);
+//        Diagnostico diag = new Diagnostico();
+//        diag.setEsferico(1);
+//        diag.setCilindro(2);
+//        diag.setAdicao(3);
+//        diag.setEixo(4);
         
 //        Categoria cat = new Categoria();
 //        cat.carregarPorId(1);
@@ -40,6 +40,6 @@ public class Programa {
 //        diag.setAtivo(true);
 //        diag.atualizar();
         
-        //new Telas.frmPrincipal().setVisible(true);
+        new Telas.frmPrincipal().setVisible(true);
     }
 }
