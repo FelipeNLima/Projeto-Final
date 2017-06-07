@@ -8,8 +8,8 @@ public class Endereco implements ICadastro {
 
     private int id;
     private String cep;
-    private String cidade;
     private String uf;
+    private String cidade;
     private String bairro;
     private String logradouro;
     private String numero;
@@ -26,11 +26,7 @@ public class Endereco implements ICadastro {
     }
 
     public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
+        return this.uf;
     }
 
     public String getCidade() {
@@ -59,6 +55,10 @@ public class Endereco implements ICadastro {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public void setCep(String cep) {
@@ -90,7 +90,6 @@ public class Endereco implements ICadastro {
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
@@ -103,13 +102,14 @@ public class Endereco implements ICadastro {
                     + "	( ?, ?, ?, ?, ?, ?, ?, ?) ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
-            Banco.cmd.setString(1, this.uf);
-            Banco.cmd.setString(2, this.cidade);
-            Banco.cmd.setString(3, this.bairro);
-            Banco.cmd.setString(4, this.logradouro);
-            Banco.cmd.setString(5, this.complemento);
-            Banco.cmd.setString(6, this.numero);
-            Banco.cmd.setInt(7, this.ativo ? 1 : 0);
+            Banco.cmd.setString(1, this.cep);
+            Banco.cmd.setString(2, this.uf);
+            Banco.cmd.setString(3, this.cidade);
+            Banco.cmd.setString(4, this.bairro);
+            Banco.cmd.setString(5, this.logradouro);
+            Banco.cmd.setString(6, this.complemento);
+            Banco.cmd.setString(7, this.numero);
+            Banco.cmd.setInt(8, this.ativo ? 1 : 0);
             Banco.leitor = Banco.cmd.executeQuery();
 
             if (Banco.leitor.next()) {
@@ -126,26 +126,28 @@ public class Endereco implements ICadastro {
     public void atualizar() {
         try {
             String query
-                    = "UPDATE enderecos SET "
-                    + "	cep		= ?,"
-                    + "	uf		= ?,"
-                    + "	cidade		= ?,"
-                    + "	logradouro	= ?,"
-                    + "	complemento	= ?,"
-                    + "	numero		= ?,"
-                    + "	ativo		= ? "
-                    + "WHERE                "
+                    = "UPDATE enderecos SET  "
+                    + "	cep		= ?, "
+                    + "	uf		= ?, "
+                    + "	cidade		= ?, "
+                    + " bairro          = ?, "
+                    + "	logradouro	= ?, "
+                    + "	complemento	= ?, "
+                    + "	numero		= ?, "
+                    + "	ativo		= ?  "
+                    + "WHERE                 "
                     + "	id_endereco = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
-            Banco.cmd.setString(1, this.uf);
-            Banco.cmd.setString(2, this.cidade);
-            Banco.cmd.setString(3, this.bairro);
-            Banco.cmd.setString(4, this.logradouro);
-            Banco.cmd.setString(5, this.complemento);
-            Banco.cmd.setString(6, this.numero);
-            Banco.cmd.setInt(7, this.ativo ? 1 : 0);
-            Banco.cmd.setInt(8, this.id);
+            Banco.cmd.setString(1, this.cep);
+            Banco.cmd.setString(2, this.uf);
+            Banco.cmd.setString(3, this.cidade);
+            Banco.cmd.setString(4, this.bairro);
+            Banco.cmd.setString(5, this.logradouro);
+            Banco.cmd.setString(6, this.complemento);
+            Banco.cmd.setString(7, this.numero);
+            Banco.cmd.setInt(8, this.ativo ? 1 : 0);
+            Banco.cmd.setInt(9, this.id);
 
             Banco.cmd.executeUpdate();
             Banco.cmd.close();
@@ -162,8 +164,8 @@ public class Endereco implements ICadastro {
 
     @Override
     public void carregarPorId(int id) {
-
         try {
+
             String query
                     = "SELECT               "
                     + "     cep,            "
@@ -185,7 +187,7 @@ public class Endereco implements ICadastro {
 
             if (Banco.leitor.next()) {
                 this.id = id;
-                this.cep = Banco.leitor.getString("descricao");
+                this.cep = Banco.leitor.getString("cep");
                 this.uf = Banco.leitor.getString("uf");
                 this.cidade = Banco.leitor.getString("cidade");
                 this.bairro = Banco.leitor.getString("bairro");

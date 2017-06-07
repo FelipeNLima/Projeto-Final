@@ -1,10 +1,6 @@
 
-import Modelos.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import Modelos.Endereco;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Programa {
 
@@ -22,9 +18,20 @@ public class Programa {
 //      cargo.setAtivo(true);
 //      cargo.atualizar();
 //      new Telas.frmPrincipal().setVisible(true);
-        
-        Date data = Funcoes.getData("25/12/2017");
-        System.out.println(Funcoes.getData(data));
+//        Endereco end = new Endereco();
+//
+//        end.setCep("1246000");
+//        end.setCidade("CAMPOS DO JORDÃO");
+//        end.setBairro("VILA BRITANIA");
+//        end.setLogradouro("RUA ANTORNIO FURTADO DE SOUZA");
+//        end.setNumero("565");
+//        end.setComplemento("COMPLEMENTO");
+//        end.setUf("SP");
+//        end.setAtivo(true);
+//
+//        end.inserir();
+//        Mensagens.mostrarMsg(end.getId() + "");
+    
 
     }
 }
