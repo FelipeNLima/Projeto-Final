@@ -1,11 +1,11 @@
 
-import Modelos.Endereco;
+import Modelos.*;
 import java.util.Date;
 
 public class Programa {
-
+    
     public static void main(String[] args) {
-        new Telas.frmPrincipal().setVisible(true);
+//        new Telas.frmPrincipal().setVisible(true);
 
 //      Cargo cargo = new Cargo();
 //      cargo.setDescricao("FINNAZII");
@@ -30,6 +30,9 @@ public class Programa {
 //        end.setAtivo(true);
 //
 //        end.inserir();
-//        Mensagens.mostrarMsg(end.getId() + "");
+        Categoria obj = new Categoria();
+        //obj.setDescricao("MIOPIA");
+        //obj.inserir();
+        //Mensagens.mostrarAviso(obj.getId() + "\n" + obj.getDescricao());
     }
 }

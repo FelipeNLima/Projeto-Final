@@ -9,15 +9,15 @@ public enum Genero {
         this.sexo = sexo;
     }
 
-    public boolean isMasculino(String genero) {
+    public static boolean isMasculino(String genero) {
         return Masculino.toString().equals(genero);
     }
 
-    public boolean isFeminino(String genero) {
+    public static boolean isFeminino(String genero) {
         return Feminino.toString().equals(genero);
     }
 
-    public String getNome(String genero) {
+    public static String getNome(String genero) {
         if (isMasculino(genero)) {
             return "Masculino";
         }
