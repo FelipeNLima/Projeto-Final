@@ -1,5 +1,10 @@
 
 import Modelos.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Programa {
 
@@ -17,5 +22,9 @@ public class Programa {
 //      cargo.setAtivo(true);
 //      cargo.atualizar();
 //      new Telas.frmPrincipal().setVisible(true);
+        
+        Date data = Funcoes.getData("25/12/2017");
+        System.out.println(Funcoes.getData(data));
+
     }
 }
