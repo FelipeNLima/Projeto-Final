@@ -1,10 +1,11 @@
 package Modelos;
 
-public class Endereco implements CadastroInterface {
+public class Endereco implements ICadastro {
 
     private int id;
     private String cep;
     private String cidade;
+    private String uf;
     private String bairro;
     private String logradouro;
     private String numero;
@@ -18,6 +19,14 @@ public class Endereco implements CadastroInterface {
 
     public String getCep() {
         return cep;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public String getCidade() {

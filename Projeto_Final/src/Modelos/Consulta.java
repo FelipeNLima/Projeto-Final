@@ -3,9 +3,11 @@ package Modelos;
 import java.sql.Time;
 import java.util.Date;
 
-public class Consulta implements CadastroInterface {
+public class Consulta implements ICadastro {
 
     private int id;
+    private Cliente cliente;
+    private Funcionario medico;
     private Date data;
     private Time horario;
     private double valor;
@@ -65,6 +67,8 @@ public class Consulta implements CadastroInterface {
 
     @Override
     public void inserir() {
+    
+        
     }
 
     @Override

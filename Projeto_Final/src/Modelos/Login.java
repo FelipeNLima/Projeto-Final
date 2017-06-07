@@ -1,6 +1,6 @@
 package Modelos;
 
-public class Login implements CadastroInterface {
+public class Login implements ICadastro {
 
     private int id;
     private String usuario;
@@ -58,7 +58,7 @@ public class Login implements CadastroInterface {
     public void carregarPorId(int id) {
     
     }
-    
+
     public static boolean validar(String usuario, String senha){
         return true;
     }

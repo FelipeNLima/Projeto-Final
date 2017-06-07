@@ -4,7 +4,7 @@ import BaseDeDados.Banco;
 import Validacoes.Excecoes;
 import java.sql.SQLException;
 
-public class Diagnostico implements CadastroInterface {
+public class Diagnostico implements ICadastro {
 
     private int id;
     private Categoria categoria;

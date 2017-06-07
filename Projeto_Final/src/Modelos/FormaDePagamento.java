@@ -1,6 +1,6 @@
 package Modelos;
 
-public class FormaDePagamento implements CadastroInterface {
+public class FormaDePagamento implements ICadastro {
 
     private int id;
     private String descricao;
