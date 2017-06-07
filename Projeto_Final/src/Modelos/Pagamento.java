@@ -7,6 +7,7 @@ public class Pagamento {
     private int id;
     private Date data;
     private double valor;
+    private byte qtdParcela;
     private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="CTOR">  
@@ -38,6 +39,14 @@ public class Pagamento {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public byte getQtdParcela() {
+        return qtdParcela;
+    }
+
+    public void setQtdParcela(byte qtdParcela) {
+        this.qtdParcela = qtdParcela;
     }
 
     public boolean getAtivo() {

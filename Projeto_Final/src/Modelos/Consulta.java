@@ -67,8 +67,8 @@ public class Consulta implements ICadastro {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(Constantes.StatusConsulta status) {
+        this.status = status.toString();
     }
 
     public Boolean getAtivo() {
