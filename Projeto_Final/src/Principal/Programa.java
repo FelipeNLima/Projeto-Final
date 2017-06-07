@@ -5,10 +5,11 @@ import java.util.Date;
 public class Programa {
 
     public static void main(String[] args) {
+        new Telas.frmPrincipal().setVisible(true);
+
 //      Cargo cargo = new Cargo();
 //      cargo.setDescricao("FINNAZII");
 //      cargo.inserir();
-
 //      Cargo cargo = new Cargo();
 //      cargo.carregarPorId(1);
 //      cargo.remover();
@@ -17,7 +18,6 @@ public class Programa {
 //      cargo.setDescricao("ALFA");
 //      cargo.setAtivo(true);
 //      cargo.atualizar();
-//      new Telas.frmPrincipal().setVisible(true);
 //        Endereco end = new Endereco();
 //
 //        end.setCep("1246000");
@@ -31,7 +31,5 @@ public class Programa {
 //
 //        end.inserir();
 //        Mensagens.mostrarMsg(end.getId() + "");
-    
-
     }
 }
