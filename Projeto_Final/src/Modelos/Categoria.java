@@ -50,11 +50,12 @@ public class Categoria implements ICadastro {
     @Override
     public void inserir() {
         try {
-            String query = "INSERT INTO categorias       "
-                         + "	(descricao, ativo)       "
-                         + "OUTPUT inserted.id_categoria "
-                         + "VALUES                      "
-                         + "	(? , ?)";
+            String query
+                    = "INSERT INTO categorias       "
+                    + "	(descricao, ativo)          "
+                    + "OUTPUT inserted.id_categoria "
+                    + "VALUES                       "
+                    + "	(? , ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -74,11 +75,12 @@ public class Categoria implements ICadastro {
     @Override
     public void atualizar() {
         try {
-            String query = "UPDATE categorias SET "
-                         + "	descricao    = ?, "
-                         + "	ativo	     = ?  "
-                         + "WHERE                 "
-                         + "	id_categoria = ?  ";
+            String query 
+                    = "UPDATE categorias SET "
+                    + "	descricao    = ?,    "
+                    + "	ativo	     = ?     "
+                    + "WHERE                 "
+                    + "	id_categoria = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -102,13 +104,14 @@ public class Categoria implements ICadastro {
     public void carregarPorId(int id) {
 
         try {
-            String query = "SELECT              "
-                         + "	descricao,      "
-                         + "	ativo           "
-                         + "FROM                "
-                         + "	categorias      "
-                         + "WHERE               "
-                         + "	id_categoria = ?";
+            String query 
+                    = "SELECT           "
+                    + "	descricao,      "
+                    + "	ativo           "
+                    + "FROM             "
+                    + "	categorias      "
+                    + "WHERE            "
+                    + "	id_categoria = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);

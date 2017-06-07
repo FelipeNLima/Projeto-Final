@@ -72,14 +72,16 @@ public class Diagnostico implements ICadastro {
     }
 
     // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
         try {
-            String query = "INSERT INTO diagnosticos                                "
-                    + "	(id_categoria, esferico, cilindro, adicao, eixo, ativo)     "
-                    + "OUTPUT inserted.id_diagnostico                               "
-                    + "VALUES                                                       "
+            String query 
+                    = "INSERT INTO diagnosticos                                 "
+                    + "	(id_categoria, esferico, cilindro, adicao, eixo, ativo) "
+                    + "OUTPUT inserted.id_diagnostico                           "
+                    + "VALUES                                                   "
                     + "	(?, ?, ?, ?, ?, ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
@@ -104,14 +106,15 @@ public class Diagnostico implements ICadastro {
     @Override
     public void atualizar() {
         try {
-            String query = "UPDATE diagnosticos SET   "
-                    + "	id_categoria     = ?, "
-                    + "	esferico	 = ?, "
-                    + "	cilindro	 = ?, "
-                    + "	adicao		 = ?, "
-                    + "	eixo		 = ?, "
-                    + "	ativo		 = ?  "
-                    + "WHERE                     "
+            String query 
+                    = "UPDATE diagnosticos SET "
+                    + "	id_categoria     = ?,  "
+                    + "	esferico	 = ?,  "
+                    + "	cilindro	 = ?,  "
+                    + "	adicao		 = ?,  "
+                    + "	eixo		 = ?,  "
+                    + "	ativo		 = ?   "
+                    + "WHERE                   "
                     + "	id_diagnostico = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
@@ -140,22 +143,23 @@ public class Diagnostico implements ICadastro {
     public void carregarPorId(int id) {
 
         try {
-            String query = "SELECT                  "
-                    + "	diagnosticos.id_categoria,  "
-                    + "	diagnosticos.esferico,      "
-                    + "	diagnosticos.cilindro,      "
-                    + "	diagnosticos.adicao,        "
-                    + "	diagnosticos.eixo,          "
-                    + "	diagnosticos.ativo,         "
-                    + "	categorias.id_categoria,    "
-                    + "	categorias.descricao		AS 'categoria',      "
-                    + "	categorias.ativo                AS 'ativo_categoria' "
-                    + "FROM                                                  "
-                    + "	diagnosticos                                         "
-                    + "INNER JOIN categorias                                 "
-                    + "	ON categorias.id_categoria	= diagnosticos.id_diagnostico "
+            String query 
+                    = "SELECT                                                        "
+                    + "     diagnosticos.id_categoria,                               "
+                    + "     diagnosticos.esferico,                                   "
+                    + "     diagnosticos.cilindro,                                   "
+                    + "     diagnosticos.adicao,                                     "
+                    + "     diagnosticos.eixo,                                       "
+                    + "     diagnosticos.ativo,                                      "
+                    + "     categorias.id_categoria,                                 "
+                    + "     categorias.descricao		AS 'categoria',      "
+                    + "     categorias.ativo                AS 'ativo_categoria'     "
+                    + "FROM                                                          "
+                    + "     diagnosticos                                             "
+                    + "INNER JOIN categorias                                         "
+                    + "     ON categorias.id_categoria = diagnosticos.id_diagnostico "
                     + "WHERE "
-                    + "	id_diagnostico = ?";
+                    + "     id_diagnostico = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
