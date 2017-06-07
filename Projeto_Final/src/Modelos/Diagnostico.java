@@ -14,6 +14,14 @@ public class Diagnostico implements ICadastro {
     private float eixo;
     private boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="CTOR">  
+    
+    public Diagnostico() {
+        ativo = true;
+    }
+
+    // </editor-fold> 
+    
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
@@ -77,7 +85,7 @@ public class Diagnostico implements ICadastro {
     @Override
     public void inserir() {
         try {
-            String query 
+            String query
                     = "INSERT INTO diagnosticos                                 "
                     + "	(id_categoria, esferico, cilindro, adicao, eixo, ativo) "
                     + "OUTPUT inserted.id_diagnostico                           "
@@ -106,7 +114,7 @@ public class Diagnostico implements ICadastro {
     @Override
     public void atualizar() {
         try {
-            String query 
+            String query
                     = "UPDATE diagnosticos SET "
                     + "	id_categoria     = ?,  "
                     + "	esferico	 = ?,  "
@@ -143,7 +151,7 @@ public class Diagnostico implements ICadastro {
     public void carregarPorId(int id) {
 
         try {
-            String query 
+            String query
                     = "SELECT                                                        "
                     + "     diagnosticos.id_categoria,                               "
                     + "     diagnosticos.esferico,                                   "

@@ -23,6 +23,22 @@ public class Consulta implements ICadastro {
         this.id = id;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Funcionario getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Funcionario medico) {
+        this.medico = medico;
+    }
+
     public Date getData() {
         return data;
     }
@@ -64,11 +80,10 @@ public class Consulta implements ICadastro {
     }
 
     //</editor-fold>
-
+    
     @Override
     public void inserir() {
-    
-        
+
     }
 
     @Override

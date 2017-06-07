@@ -9,6 +9,12 @@ public class Pagamento {
     private double valor;
     private boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="CTOR">  
+    public Pagamento() {
+        this.ativo = true;
+    }
+    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
@@ -41,6 +47,6 @@ public class Pagamento {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
+
     // </editor-fold>
 }

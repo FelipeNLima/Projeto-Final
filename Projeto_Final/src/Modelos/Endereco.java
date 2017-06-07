@@ -16,6 +16,12 @@ public class Endereco implements ICadastro {
     private String complemento;
     private boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="CTR">
+    public Endereco() {
+        this.ativo = true;
+    }
+    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
@@ -90,6 +96,7 @@ public class Endereco implements ICadastro {
     }
 
     // </editor-fold>
+ 
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {

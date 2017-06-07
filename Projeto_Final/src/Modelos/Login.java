@@ -7,6 +7,12 @@ public class Login implements ICadastro {
     private String senha;
     private boolean ativo;
 
+    // <editor-fold defaultstate="collapsed" desc="CTR">
+    public Login() {
+        this.ativo = true;
+    }
+    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
@@ -41,7 +47,7 @@ public class Login implements ICadastro {
     }
 
     // </editor-fold> 
-   
+    
     @Override
     public void inserir() {
     }
@@ -56,10 +62,10 @@ public class Login implements ICadastro {
 
     @Override
     public void carregarPorId(int id) {
-    
+
     }
 
-    public static boolean validar(String usuario, String senha){
+    public static boolean validar(String usuario, String senha) {
         return true;
     }
 }
