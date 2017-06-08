@@ -1,9 +1,10 @@
 
 import Modelos.*;
 import java.util.Date;
+import javafx.scene.paint.Color;
 
 public class Programa {
-    
+
     public static void main(String[] args) {
 //        new Telas.frmPrincipal().setVisible(true);
 
@@ -19,7 +20,6 @@ public class Programa {
 //      cargo.setAtivo(true);
 //      cargo.atualizar();
 //        Endereco end = new Endereco();
-//
 //        end.setCep("1246000");
 //        end.setCidade("CAMPOS DO JORDÃO");
 //        end.setBairro("VILA BRITANIA");
@@ -28,11 +28,7 @@ public class Programa {
 //        end.setComplemento("COMPLEMENTO");
 //        end.setUf("SP");
 //        end.setAtivo(true);
-//
 //        end.inserir();
-        Categoria obj = new Categoria();
-        //obj.setDescricao("MIOPIA");
-        //obj.inserir();
-        //Mensagens.mostrarAviso(obj.getId() + "\n" + obj.getDescricao());
+ 
     }
 }
