@@ -1,3 +1,4 @@
+package Validacoes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,5 +20,14 @@ public class Funcoes {
 
     public static String getData(Date data) {
         return new SimpleDateFormat("dd/MM/yyyy").format(data);
+    }
+
+    public static java.sql.Date converterData(java.util.Date dtUtil) {
+        java.sql.Date dtSql = new java.sql.Date(dtUtil.getTime());
+        dtSql.setDate(dtUtil.getDate());
+        dtSql.setMonth(dtUtil.getMonth());
+        dtSql.setYear(dtUtil.getYear());
+
+        return dtSql;
     }
 }

@@ -29,6 +29,28 @@ public class Programa {
 //        end.setUf("SP");
 //        end.setAtivo(true);
 //        end.inserir();
- 
+        Consulta c = new Consulta();
+        c.setId(3);
+
+        Date dt = Validacoes.Funcoes.getData("30/10/2017");
+        FormaDePagamento f = new FormaDePagamento();
+        f.carregarPorId(1);
+
+        Pagamento pag = new Pagamento();
+        pag.setConsulta(c);
+        pag.setData(dt);
+        pag.setValor(100.00);
+        pag.setQtdParcela((byte) 1);
+        pag.setAtivo(true);
+        pag.setFormaDePagamento(f);
+
+        // pag.inserir();
+        pag.carregarPorId(3);
+        pag.setValor(666.00);
+        
+        for (Pagamento p : Pagamento.carregarPorIdConsulta(3)) {
+            Validacoes.Mensagens.mostrarAviso(p.getId() + "\n" + p.getData() + "\n" + p.getValor());
+        }
+
     }
 }

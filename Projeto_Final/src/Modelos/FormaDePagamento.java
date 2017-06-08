@@ -117,7 +117,7 @@ public class FormaDePagamento implements ICadastro {
                     + "FROM                      "
                     + "	forma_de_pagamento       "
                     + "WHERE                     "
-                    + "	id_forma_de_pagamento = ?";
+                    + "	id_forma_pagamento = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);

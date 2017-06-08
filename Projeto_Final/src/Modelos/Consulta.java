@@ -80,6 +80,7 @@ public class Consulta implements ICadastro {
     }
 
     //</editor-fold>
+   
     @Override
     public void inserir() {
 
