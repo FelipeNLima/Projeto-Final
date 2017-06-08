@@ -9,5 +9,7 @@ public interface ICadastro {
 
     public void remover();
 
+    public void carregar();
+    
     public void carregarPorId(int id);
 }

@@ -3,6 +3,7 @@ package Modelos;
 import BaseDeDados.Banco;
 import Validacoes.Excecoes;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Categoria implements ICadastro {
 
@@ -46,7 +47,7 @@ public class Categoria implements ICadastro {
     }
     // </editor-fold> 
 
-    // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
+    // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER, CARREGAR POR ID E CARREGAR">  
     @Override
     public void inserir() {
         try {
@@ -75,7 +76,7 @@ public class Categoria implements ICadastro {
     @Override
     public void atualizar() {
         try {
-            String query 
+            String query
                     = "UPDATE categorias SET "
                     + "	descricao    = ?,    "
                     + "	ativo	     = ?     "
@@ -99,12 +100,16 @@ public class Categoria implements ICadastro {
         this.ativo = false;
         atualizar();
     }
-
+    @Override
+    public void carregar() {
+        carregarPorId(this.id);
+    }
+    
     @Override
     public void carregarPorId(int id) {
 
         try {
-            String query 
+            String query
                     = "SELECT           "
                     + "	descricao,      "
                     + "	ativo           "
@@ -125,8 +130,41 @@ public class Categoria implements ICadastro {
 
             Banco.cmd.close();
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+             Excecoes.mostrarExcecoes(ex);
         }
     }
-    // </editor-fold> 
+
+    public static ArrayList<Categoria> carregarTodos() {
+        ArrayList<Categoria> lista = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT          "
+                    + "	 id_categoria, "
+                    + "	 descricao     "
+                    + "FROM            "
+                    + "	 categorias    "
+                    + "WHERE           "
+                    + "	 ativo = 1  ";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            while (Banco.leitor.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setId(Banco.leitor.getInt("id_categoria"));
+                categoria.setDescricao(Banco.leitor.getString("descricao"));
+
+                lista.add(categoria);
+            }
+
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+             Excecoes.mostrarExcecoes(ex);
+        }
+
+        return lista;
+    }
+
+// </editor-fold> 
 }

@@ -15,13 +15,11 @@ public class Diagnostico implements ICadastro {
     private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="CTOR">  
-    
     public Diagnostico() {
         ativo = true;
     }
 
     // </editor-fold> 
-    
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
@@ -80,7 +78,6 @@ public class Diagnostico implements ICadastro {
     }
 
     // </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
@@ -148,6 +145,11 @@ public class Diagnostico implements ICadastro {
     }
 
     @Override
+    public void carregar() {
+        carregarPorId(this.id);
+    }
+
+    @Override
     public void carregarPorId(int id) {
 
         try {
@@ -189,7 +191,7 @@ public class Diagnostico implements ICadastro {
 
             Banco.cmd.close();
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+            Excecoes.mostrarExcecoes(ex);
         }
     }
     // </editor-fold> 

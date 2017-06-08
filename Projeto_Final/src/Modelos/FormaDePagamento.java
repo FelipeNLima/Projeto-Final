@@ -47,7 +47,6 @@ public class FormaDePagamento implements ICadastro {
     }
 
     // </editor-fold> 
-
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
@@ -103,6 +102,11 @@ public class FormaDePagamento implements ICadastro {
     }
 
     @Override
+    public void carregar() {
+        carregarPorId(this.id);
+    }
+
+    @Override
     public void carregarPorId(int id) {
 
         try {
@@ -127,7 +131,7 @@ public class FormaDePagamento implements ICadastro {
 
             Banco.cmd.close();
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+            Excecoes.mostrarExcecoes(ex);
         }
     }
     // </editor-fold> 

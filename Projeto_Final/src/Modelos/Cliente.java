@@ -11,6 +11,11 @@ public class Cliente extends Pessoa {
     }
 
     @Override
+    public void carregar() {
+        carregarPorId(this.id);
+    }
+
+    @Override
     public void remover() {
     }
 

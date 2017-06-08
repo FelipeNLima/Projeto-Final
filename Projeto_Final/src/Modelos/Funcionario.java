@@ -25,7 +25,6 @@ public class Funcionario extends Pessoa {
     }
 
     // </editor-fold>
-
     @Override
     public void inserir() {
     }
@@ -36,6 +35,11 @@ public class Funcionario extends Pessoa {
 
     @Override
     public void remover() {
+    }
+
+    @Override
+    public void carregar() {
+        carregarPorId(this.id);
     }
 
     @Override

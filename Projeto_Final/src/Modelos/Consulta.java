@@ -80,7 +80,6 @@ public class Consulta implements ICadastro {
     }
 
     //</editor-fold>
-    
     @Override
     public void inserir() {
 
@@ -92,6 +91,11 @@ public class Consulta implements ICadastro {
 
     @Override
     public void remover() {
+    }
+
+    @Override
+    public void carregar() {
+        carregarPorId(this.id);
     }
 
     @Override
