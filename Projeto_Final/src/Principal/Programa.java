@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class Programa {
 
     public static void main(String[] args) {
-//        new Telas.frmPrincipal().setVisible(true);
+        new Telas.frmModeloConsultaPequeno().setVisible(true);
 
 //      Cargo cargo = new Cargo();
 //      cargo.setDescricao("FINNAZII");
