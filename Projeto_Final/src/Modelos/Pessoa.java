@@ -5,6 +5,7 @@ import java.util.Date;
 public abstract class Pessoa  implements ICadastro{
 
     protected int id;
+    protected Endereco endereco;
     protected String nome;
     protected String cpf;
     protected String genero;
@@ -24,6 +25,15 @@ public abstract class Pessoa  implements ICadastro{
         this.id = id;
     }
 
+    
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
     public boolean getAtivo() {
         return ativo;
     }
