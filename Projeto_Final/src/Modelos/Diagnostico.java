@@ -20,6 +20,7 @@ public class Diagnostico implements ICadastro {
     }
 
     // </editor-fold> 
+    
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public int getId() {
         return id;
@@ -78,16 +79,17 @@ public class Diagnostico implements ICadastro {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO diagnosticos                                 "
-                    + "	(id_categoria, esferico, cilindro, adicao, eixo, ativo) "
-                    + "OUTPUT inserted.id_diagnostico                           "
-                    + "VALUES                                                   "
-                    + "	(?, ?, ?, ?, ?, ?)";
+                    = "INSERT INTO diagnosticos                                   "
+                    + "   (id_categoria, esferico, cilindro, adicao, eixo, ativo) "
+                    + "OUTPUT inserted.id_diagnostico                             "
+                    + "VALUES                                                     "
+                    + "   (?, ?, ?, ?, ?, ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.categoria.getId());
@@ -113,14 +115,14 @@ public class Diagnostico implements ICadastro {
         try {
             String query
                     = "UPDATE diagnosticos SET "
-                    + "	id_categoria     = ?,  "
-                    + "	esferico	 = ?,  "
-                    + "	cilindro	 = ?,  "
-                    + "	adicao		 = ?,  "
-                    + "	eixo		 = ?,  "
-                    + "	ativo		 = ?   "
+                    + "	  id_categoria   = ?,  "
+                    + "	  esferico	 = ?,  "
+                    + "	  cilindro	 = ?,  "
+                    + "	  adicao	 = ?,  "
+                    + "	  eixo		 = ?,  "
+                    + "	  ativo		 = ?   "
                     + "WHERE                   "
-                    + "	id_diagnostico = ?";
+                    + "	  id_diagnostico = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.categoria.getId());

@@ -80,16 +80,18 @@ public class Pagamento implements ICadastro {
     }
 
     // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER, CARREGAR POR ID E CARREGAR">  
+    
+    // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER, CARREGAR POR ID E CARREGAR">  
+    
     @Override
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO pagamentos                                              "
-                    + "	(id_forma_pagamento, id_consulta, data, valor, qtd_parcela, ativo) "
-                    + "OUTPUT inserted.id_pagamento                                        "
-                    + "VALUES                                                              "
-                    + "	(?, ?, ?, ?, ?, ?)";
+                    = "INSERT INTO pagamentos                                                "
+                    + "	  (id_forma_pagamento, id_consulta, data, valor, qtd_parcela, ativo) "
+                    + "OUTPUT inserted.id_pagamento                                          "
+                    + "VALUES                                                                "
+                    + "	  (?, ?, ?, ?, ?, ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.formaDePagamento.getId());

@@ -61,16 +61,17 @@ public class Login implements ICadastro {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER, CARREGAR POR ID E CARREGAR">  
     @Override
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO logins                       "
-                    + "	(id_funcionario, usuario, senha, ativo) "
-                    + "OUTPUT inserted.id_login                 "
-                    + "VALUES                                   "
-                    + "	(?, ? , ?, ?)";
+                    = "INSERT INTO logins                         "
+                    + "	  (id_funcionario, usuario, senha, ativo) "
+                    + "OUTPUT inserted.id_login                   "
+                    + "VALUES                                     "
+                    + "	  (?, ? , ?, ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, funcionario.getId());
@@ -94,13 +95,13 @@ public class Login implements ICadastro {
     public void atualizar() {
         try {
             String query
-                    = "UPDATE logins SET    "
-                    + " id_funcionario = ?, "
-                    + "	usuario        = ?, "
-                    + "	senha          = ?, "
-                    + "	ativo          = ?  "
-                    + "WHERE                "
-                    + "	id_login = ? ";
+                    = "UPDATE logins SET      "
+                    + "   id_funcionario = ?, "
+                    + "	  usuario        = ?, "
+                    + "	  senha          = ?, "
+                    + "	  ativo          = ?  "
+                    + "WHERE                  "
+                    + "	  id_login = ? ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.funcionario.getId());
@@ -132,15 +133,15 @@ public class Login implements ICadastro {
 
         try {
             String query
-                    = "SELECT           "
-                    + " id_funcionario, "
-                    + "	usuario,        "
-                    + "	senha,          "
-                    + "	ativo           "
-                    + "FROM             "
-                    + "	logins          "
-                    + "WHERE            "
-                    + "	id_login = ?";
+                    = "SELECT             "
+                    + "   id_funcionario, "
+                    + "	  usuario,        "
+                    + "	  senha,          "
+                    + "	  ativo           "
+                    + "FROM               "
+                    + "	  logins          "
+                    + "WHERE              "
+                    + "	  id_login = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
@@ -166,15 +167,15 @@ public class Login implements ICadastro {
 
         try {
             String query
-                    = "SELECT            "
-                    + "	 id_login,       "
-                    + "  id_funcionario, "
-                    + "	 usuario,        "
-                    + "  senha           "
-                    + "FROM              "
-                    + "	 logins          "
-                    + "WHERE             "
-                    + "	 ativo = 1  ";
+                    = "SELECT              "
+                    + "	   id_login,       "
+                    + "    id_funcionario, "
+                    + "	   usuario,        "
+                    + "    senha           "
+                    + "FROM                "
+                    + "	   logins          "
+                    + "WHERE               "
+                    + "	   ativo = 1  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.leitor = Banco.cmd.executeQuery();

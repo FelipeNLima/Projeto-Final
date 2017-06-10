@@ -82,7 +82,7 @@ public class Cargo implements ICadastro {
                     + "     descricao   = ?, "
                     + "     ativo	= ?  "
                     + "WHERE                 "
-                    + "     id_cargo   = ?   ";
+                    + "     id_cargo    = ?  ";
             
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -141,13 +141,13 @@ public class Cargo implements ICadastro {
         
         try {
             String query
-                    = "SELECT      "
-                    + "	 id_cargo, "
-                    + "	 descricao "
-                    + "FROM        "
-                    + "	 cargos    "
-                    + "WHERE       "
-                    + "	 ativo = 1 ";
+                    = "SELECT         "
+                    + "     id_cargo, "
+                    + "     descricao "
+                    + "FROM           "
+                    + "     cargos    "
+                    + "WHERE          "
+                    + "     ativo = 1 ";
             
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.leitor = Banco.cmd.executeQuery();

@@ -96,16 +96,17 @@ public class Endereco implements ICadastro {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO enderecos                                              "
-                    + "	(cep, uf, cidade, bairro, logradouro, complemento, numero, ativo) "
-                    + "OUTPUT inserted.id_endereco                                        "
-                    + "VALUES                                                             "
-                    + "	( ?, ?, ?, ?, ?, ?, ?, ?) ";
+                    = "INSERT INTO enderecos                                                "
+                    + "   (cep, uf, cidade, bairro, logradouro, complemento, numero, ativo) "
+                    + "OUTPUT inserted.id_endereco                                          "
+                    + "VALUES                                                               "
+                    + "	   ( ?, ?, ?, ?, ?, ?, ?, ?) ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.cep);
@@ -133,16 +134,16 @@ public class Endereco implements ICadastro {
         try {
             String query
                     = "UPDATE enderecos SET  "
-                    + "	cep		= ?, "
-                    + "	uf		= ?, "
-                    + "	cidade		= ?, "
-                    + " bairro          = ?, "
-                    + "	logradouro	= ?, "
-                    + "	complemento	= ?, "
-                    + "	numero		= ?, "
-                    + "	ativo		= ?  "
+                    + "	  cep		= ?, "
+                    + "	  uf		= ?, "
+                    + "	  cidade	= ?, "
+                    + "   bairro        = ?, "
+                    + "	  logradouro	= ?, "
+                    + "	  complemento	= ?, "
+                    + "	  numero	= ?, "
+                    + "	  ativo		= ?  "
                     + "WHERE                 "
-                    + "	id_endereco = ?";
+                    + "	  id_endereco = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.cep);

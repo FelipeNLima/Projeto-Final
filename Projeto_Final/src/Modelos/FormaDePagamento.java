@@ -54,10 +54,10 @@ public class FormaDePagamento implements ICadastro {
         try {
             String query
                     = "INSERT INTO forma_de_pagamento        "
-                    + "	(descricao, ativo)                   "
+                    + "	  (descricao, ativo)                 "
                     + "OUTPUT inserted.id_forma_de_pagamento "
                     + "VALUES                                "
-                    + "	(? , ?)";
+                    + "	  (? , ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -79,10 +79,10 @@ public class FormaDePagamento implements ICadastro {
         try {
             String query
                     = "UPDATE forma_de_pagamento SET "
-                    + "	descricao  = ?,              "
-                    + "	ativo	   = ?               "
+                    + "	  descricao  = ?,            "
+                    + "	  ativo	     = ?             "
                     + "WHERE                         "
-                    + "	id_forma_de_pagamento = ?    ";
+                    + "	  id_forma_de_pagamento = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -112,13 +112,13 @@ public class FormaDePagamento implements ICadastro {
 
         try {
             String query
-                    = "SELECT                    "
-                    + "	descricao,               "
-                    + "	ativo                    "
-                    + "FROM                      "
-                    + "	forma_de_pagamento       "
-                    + "WHERE                     "
-                    + "	id_forma_pagamento = ?";
+                    = "SELECT                   "
+                    + "	  descricao,            "
+                    + "	  ativo                 "
+                    + "FROM                     "
+                    + "	  forma_de_pagamento    "
+                    + "WHERE                    "
+                    + "	  id_forma_pagamento = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);

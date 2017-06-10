@@ -53,10 +53,10 @@ public class Categoria implements ICadastro {
         try {
             String query
                     = "INSERT INTO categorias       "
-                    + "	(descricao, ativo)          "
+                    + "    (descricao, ativo)       "
                     + "OUTPUT inserted.id_categoria "
                     + "VALUES                       "
-                    + "	(? , ?)";
+                    + "    (? , ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -78,10 +78,10 @@ public class Categoria implements ICadastro {
         try {
             String query
                     = "UPDATE categorias SET "
-                    + "	descricao    = ?,    "
-                    + "	ativo	     = ?     "
+                    + "    descricao    = ?, "
+                    + "	   ativo	= ?  "
                     + "WHERE                 "
-                    + "	id_categoria = ?  ";
+                    + "	   id_categoria = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -110,13 +110,13 @@ public class Categoria implements ICadastro {
 
         try {
             String query
-                    = "SELECT           "
-                    + "	descricao,      "
-                    + "	ativo           "
-                    + "FROM             "
-                    + "	categorias      "
-                    + "WHERE            "
-                    + "	id_categoria = ?";
+                    = "SELECT              "
+                    + "    descricao,      "
+                    + "	   ativo           "
+                    + "FROM                "
+                    + "	   categorias      "
+                    + "WHERE               "
+                    + "	   id_categoria = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
@@ -139,13 +139,13 @@ public class Categoria implements ICadastro {
 
         try {
             String query
-                    = "SELECT          "
-                    + "	 id_categoria, "
-                    + "	 descricao     "
-                    + "FROM            "
-                    + "	 categorias    "
-                    + "WHERE           "
-                    + "	 ativo = 1  ";
+                    = "SELECT            "
+                    + "    id_categoria, "
+                    + "	   descricao     "
+                    + "FROM              "
+                    + "	   categorias    "
+                    + "WHERE             "
+                    + "	   ativo = 1";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.leitor = Banco.cmd.executeQuery();

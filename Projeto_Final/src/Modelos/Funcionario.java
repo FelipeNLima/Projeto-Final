@@ -37,16 +37,17 @@ public class Funcionario extends Pessoa {
     }
 
     //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">
     @Override
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO funcionarios                                 "
-                    + "	(id_endereco, id_cargo, nome, cpf, genero, data_de_nascimento, celular, telefone, email, salario, data_de_admissao, ativo) "
-                    + "OUTPUT inserted.id_funcionario                           "
-                    + "VALUES                                                   "
-                    + "	(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    = "INSERT INTO funcionarios                                                                                                      "
+                    + "   (id_endereco, id_cargo, nome, cpf, genero, data_de_nascimento, celular, telefone, email, salario, data_de_admissao, ativo) "
+                    + "OUTPUT inserted.id_funcionario                                                                                                "
+                    + "VALUES                                                                                                                        "
+                    + "	  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.endereco.getId());
@@ -78,21 +79,21 @@ public class Funcionario extends Pessoa {
     public void atualizar() {
         try {
             String query
-                    = "UPDATE funcionarios      SET     "
-                    + "	id_endereco             = ?,    "
-                    + "	id_cargo                = ?,    "
-                    + " nome                    = ?,    "
-                    + " cpf                     = ?,    "
-                    + " genero                  = ?,    "
-                    + " data_de_nascimento      = ?,    "
-                    + " celular                 = ?,    "
-                    + " telefone                = ?,    "
-                    + " email                   = ?,    "
-                    + " salario                 = ?,    "
-                    + " data_de_admissao        = ?,    "
-                    + " ativo                   = ?     "
-                    + " WHERE                           "
-                    + "	id_funcionario          = ?     ";
+                    = "UPDATE funcionarios      SET    "
+                    + "	  id_endereco             = ?, "
+                    + "	  id_cargo                = ?, "
+                    + "   nome                    = ?, "
+                    + "   cpf                     = ?, "
+                    + "   genero                  = ?, "
+                    + "   data_de_nascimento      = ?, "
+                    + "   celular                 = ?, "
+                    + "   telefone                = ?, "
+                    + "   email                   = ?, "
+                    + "   salario                 = ?, "
+                    + "   data_de_admissao        = ?, "
+                    + "   ativo                   = ?  "
+                    + "WHERE                           "
+                    + "	   id_funcionario         = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.endereco.getId());
@@ -126,23 +127,22 @@ public class Funcionario extends Pessoa {
     public void carregarPorId(int id) {
         try {
             String query
-                    = "SELECT                                             "
-                    + "     id_funcionario,                               "
-                    + "     id_endereco,                                  "
-                    + "     id_cargo,                                     "
-                    + "     nome,                                         "
-                    + "     cpf,                                          "
-                    + "     genero,                                       "
-                    + "     data_de_nascimento,                           "
-                    + "     celular,                                      "
-                    + "     telefone,                                     "
-                    + "     email,                                        "
-                    + "     salario,                                      "
-                    + "     data_de_admissao,                             "
-                    + "    ativo,                                         "
-                    + "FROM                                               "
-                    + "     funcionarios                                  "
-                    + "WHERE id_funcioario = ?                            ";
+                    = "SELECT                     "
+                    + "     id_endereco,          "
+                    + "     id_cargo,             "
+                    + "     nome,                 "
+                    + "     cpf,                  "
+                    + "     genero,               "
+                    + "     data_de_nascimento,   "
+                    + "     celular,              "
+                    + "     telefone,             "
+                    + "     email,                "
+                    + "     salario,              "
+                    + "     data_de_admissao,     "
+                    + "    ativo,                 "
+                    + "FROM                       "
+                    + "     funcionarios          "
+                    + "WHERE id_funcioario = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
@@ -180,7 +180,7 @@ public class Funcionario extends Pessoa {
 
     @Override
     public void carregar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        carregarPorId(this.id);
     }
 
     // </editor-fold>
