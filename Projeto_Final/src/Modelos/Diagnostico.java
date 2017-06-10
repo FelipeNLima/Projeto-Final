@@ -79,7 +79,7 @@ public class Diagnostico implements ICadastro {
     }
 
     // </editor-fold>
-    
+  
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {
@@ -156,22 +156,17 @@ public class Diagnostico implements ICadastro {
 
         try {
             String query
-                    = "SELECT                                                        "
-                    + "     diagnosticos.id_categoria,                               "
-                    + "     diagnosticos.esferico,                                   "
-                    + "     diagnosticos.cilindro,                                   "
-                    + "     diagnosticos.adicao,                                     "
-                    + "     diagnosticos.eixo,                                       "
-                    + "     diagnosticos.ativo,                                      "
-                    + "     categorias.id_categoria,                                 "
-                    + "     categorias.descricao		AS 'categoria',      "
-                    + "     categorias.ativo                AS 'ativo_categoria'     "
-                    + "FROM                                                          "
-                    + "     diagnosticos                                             "
-                    + "INNER JOIN categorias                                         "
-                    + "     ON categorias.id_categoria = diagnosticos.id_diagnostico "
-                    + "WHERE "
-                    + "     id_diagnostico = ?";
+                    = "SELECT               "
+                    + "	  id_categoria,     "
+                    + "	  esferico,         "
+                    + "	  cilindro,         "
+                    + "	  adicao,           "
+                    + "	  eixo,             "
+                    + "	  ativo             "
+                    + "FROM                 "
+                    + "	  diagnosticos      "
+                    + "WHERE                "
+                    + "	  id_diagnostico = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
@@ -179,22 +174,22 @@ public class Diagnostico implements ICadastro {
 
             if (Banco.leitor.next()) {
                 this.id = id;
+                categoria = new Categoria();
+                categoria.setId(Banco.leitor.getInt("id_categoria"));
+                
                 this.esferico = Banco.leitor.getFloat("esferico");
                 this.cilindro = Banco.leitor.getFloat("cilindro");
                 this.adicao = Banco.leitor.getFloat("adicao");
                 this.eixo = Banco.leitor.getFloat("eixo");
                 this.ativo = Banco.leitor.getInt("ativo") == 1;
-
-                categoria = new Categoria();
-                categoria.setId(Banco.leitor.getInt("id_categoria"));
-                categoria.setDescricao(Banco.leitor.getString("categoria"));
-                categoria.setAtivo(Banco.leitor.getInt("ativo_categoria") == 1);
             }
 
             Banco.cmd.close();
         } catch (SQLException ex) {
             Excecoes.mostrarExcecoes(ex);
         }
+        
+        this.categoria.carregar();
     }
     // </editor-fold> 
 }
