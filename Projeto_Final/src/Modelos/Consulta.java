@@ -14,7 +14,7 @@ public class Consulta implements ICadastro {
     private Date data;
     private Time horario;
     private double valor;
-    private String status;
+    private Constantes.StatusConsulta status;
     private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
@@ -66,12 +66,12 @@ public class Consulta implements ICadastro {
         this.valor = valor;
     }
 
-    public String getStatus() {
+    public Constantes.StatusConsulta getStatus() {
         return status;
     }
 
     public void setStatus(Constantes.StatusConsulta status) {
-        this.status = status.toString();
+        this.status = status;
     }
 
     public Boolean getAtivo() {
@@ -83,6 +83,7 @@ public class Consulta implements ICadastro {
     }
 
     //</editor-fold>
+  
     @Override
     public void inserir() {
         try {
@@ -99,7 +100,7 @@ public class Consulta implements ICadastro {
             Banco.cmd.setDate(3, Validacoes.Funcoes.converterData(this.data));
             Banco.cmd.setTime(4, this.horario);
             Banco.cmd.setDouble(5, this.valor);
-            Banco.cmd.setString(6, "A");
+            Banco.cmd.setString(6, Constantes.StatusConsulta.getStatus(this.status));
             Banco.cmd.setInt(7, this.ativo ? 1 : 0);
             Banco.leitor = Banco.cmd.executeQuery();
 
@@ -135,7 +136,7 @@ public class Consulta implements ICadastro {
             Banco.cmd.setDate(3, Validacoes.Funcoes.converterData(this.data));
             Banco.cmd.setTime(4, this.horario);
             Banco.cmd.setDouble(5, this.valor);
-            Banco.cmd.setString(6, this.status);
+            Banco.cmd.setString(6, Constantes.StatusConsulta.getStatus(this.status));
             Banco.cmd.setInt(7, this.ativo ? 1 : 0);
             Banco.cmd.setInt(8, this.id);
 

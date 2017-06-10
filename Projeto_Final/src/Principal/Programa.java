@@ -18,7 +18,7 @@ public class Programa {
         c.setData(Validacoes.Funcoes.getData("10/10/2017"));
         c.setHorario(new Time(9, 10, 1));
         c.setValor(100);
-        c.setStatus(StatusConsulta.Atrazada);
+        c.setStatus(StatusConsulta.Finalizada);
 
         c.inserir();
     }
