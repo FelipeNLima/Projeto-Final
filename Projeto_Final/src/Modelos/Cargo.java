@@ -53,11 +53,11 @@ public class Cargo implements ICadastro {
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO cargos       "
-                    + "	(descricao, ativo)      "
-                    + "OUTPUT inserted.id_cargo "
-                    + "VALUES                   "
-                    + "	(? , ?)";
+                    = "INSERT INTO cargos        "
+                    + "     (descricao, ativo)   "
+                    + "OUTPUT inserted.id_cargo  "
+                    + " VALUES                   "
+                    + "     (? , ?)";
             
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -78,11 +78,11 @@ public class Cargo implements ICadastro {
     public void atualizar() {
         try {
             String query
-                    = "UPDATE cargos SET "
-                    + "	descricao  = ?,  "
-                    + "	ativo	   = ?   "
-                    + "WHERE             "
-                    + "	id_cargo   = ?   ";
+                    = "UPDATE cargos SET     "
+                    + "     descricao   = ?, "
+                    + "     ativo	= ?  "
+                    + "WHERE                 "
+                    + "     id_cargo   = ?   ";
             
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -112,13 +112,13 @@ public class Cargo implements ICadastro {
         
         try {
             String query
-                    = "SELECT       "
-                    + "	descricao,  "
-                    + "	ativo       "
-                    + "FROM	    "
-                    + "	cargos      "
-                    + "WHERE        "
-                    + "	id_cargo = ?";
+                    = "SELECT            "
+                    + "     descricao,   "
+                    + "     ativo        "
+                    + "FROM              "
+                    + "     cargos       "
+                    + "WHERE             "
+                    + "     id_cargo = ? ";
             
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
