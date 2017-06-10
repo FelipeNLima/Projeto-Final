@@ -37,7 +37,6 @@ public class Funcionario extends Pessoa {
     }
 
     //</editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">
     @Override
     public void inserir() {
@@ -92,6 +91,8 @@ public class Funcionario extends Pessoa {
                     + "   salario                 = ?, "
                     + "   data_de_admissao        = ?, "
                     + "   ativo                   = ?  "
+                    + "FROM                            "
+                    + "   funcionarios                 "
                     + "WHERE                           "
                     + "	   id_funcionario         = ?  ";
 
@@ -139,10 +140,10 @@ public class Funcionario extends Pessoa {
                     + "     email,                "
                     + "     salario,              "
                     + "     data_de_admissao,     "
-                    + "    ativo,                 "
+                    + "    ativo                  "
                     + "FROM                       "
                     + "     funcionarios          "
-                    + "WHERE id_funcioario = ?";
+                    + "WHERE id_funcionario = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
@@ -166,15 +167,14 @@ public class Funcionario extends Pessoa {
                 this.salario = Banco.leitor.getDouble("salario");
                 this.dataDeAdmissao = Banco.leitor.getDate("data_de_admissao");
                 this.ativo = Banco.leitor.getByte("ativo") == 1;
-                
+
             }
 
             Banco.cmd.close();
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+            Validacoes.Mensagens.mostrarAviso(ex.toString());
         }
-        
-        endereco.carregar();
+
         cargo.carregar();
     }
 

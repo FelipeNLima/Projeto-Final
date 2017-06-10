@@ -2,9 +2,9 @@ package Modelos;
 
 import BaseDeDados.Banco;
 import Validacoes.Excecoes;
+import java.util.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.sql.Date;
 
 public class Consulta implements ICadastro {
 
@@ -83,24 +83,23 @@ public class Consulta implements ICadastro {
     }
 
     //</editor-fold>
-    
     @Override
     public void inserir() {
         try {
             String query
-                    = "INSERT INTO consultas                                 "
-                    + "	(id_cliente, id_medico, data, horario, valor, status, ativo) "
-                    + "OUTPUT inserted.id_consulta                           "
-                    + "VALUES                                                   "
-                    + "	(?, ?, ?, ?, ?, ?, ?)";
+                    = "INSERT INTO consultas                                           "
+                    + "	  (id_cliente, id_medico, data, horario, valor, status, ativo) "
+                    + "OUTPUT inserted.id_consulta                                     "
+                    + "VALUES                                                          "
+                    + "	  (?, ?, ?, ?, ?, ?, ?)";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.cliente.getId());
             Banco.cmd.setInt(2, this.medico.getId());
-            Banco.cmd.setDate(3, (Date) this.data);
+            Banco.cmd.setDate(3, Validacoes.Funcoes.converterData(this.data));
             Banco.cmd.setTime(4, this.horario);
             Banco.cmd.setDouble(5, this.valor);
-            Banco.cmd.setString(6, this.status);
+            Banco.cmd.setString(6, "A");
             Banco.cmd.setInt(7, this.ativo ? 1 : 0);
             Banco.leitor = Banco.cmd.executeQuery();
 
@@ -119,21 +118,21 @@ public class Consulta implements ICadastro {
     public void atualizar() {
         try {
             String query
-                    = "UPDATE consultas SET "
-                    + "	id_cliente       = ?,  "
-                    + "	id_medico        = ?,  "
-                    + "	data             = ?,  "
-                    + "	horario          = ?,  "
-                    + "	valor		 = ?,  "
-                    + "	status		 = ?,  "
-                    + "	ativo		 = ?   "
+                    = "UPDATE consultas SET    "
+                    + "	  id_cliente     = ?,  "
+                    + "	  id_medico      = ?,  "
+                    + "	  data           = ?,  "
+                    + "	  horario        = ?,  "
+                    + "	  valor		 = ?,  "
+                    + "	  status	 = ?,  "
+                    + "	  ativo		 = ?   "
                     + "WHERE                   "
-                    + "	id_consulta = ?";
+                    + "	   id_consulta = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.cliente.getId());
             Banco.cmd.setInt(2, this.medico.getId());
-            Banco.cmd.setDate(3, (Date) this.data);
+            Banco.cmd.setDate(3, Validacoes.Funcoes.converterData(this.data));
             Banco.cmd.setTime(4, this.horario);
             Banco.cmd.setDouble(5, this.valor);
             Banco.cmd.setString(6, this.status);
@@ -165,7 +164,7 @@ public class Consulta implements ICadastro {
                     + "     diagnosticos.eixo,                                       "
                     + "     diagnosticos.ativo,                                      "
                     + "     categorias.id_categoria,                                 "
-                    + "     categorias.descricao		AS 'categoria',      "
+                    + "     categorias.descricao            AS 'categoria',      "
                     + "     categorias.ativo                AS 'ativo_categoria'     "
                     + "FROM                                                          "
                     + "     diagnosticos                                             "
@@ -179,13 +178,18 @@ public class Consulta implements ICadastro {
             Banco.leitor = Banco.cmd.executeQuery();
 
             if (Banco.leitor.next()) {
-              
+
             }
 
             Banco.cmd.close();
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
+    }
+
+    @Override
+    public void carregar() {
+        carregarPorId(this.id);
     }
 
     public static void trocar(Consulta consultaA, Consulta consultaB) {
@@ -199,10 +203,5 @@ public class Consulta implements ICadastro {
 
         consultaA.atualizar();
         consultaB.atualizar();
-    }
-
-    @Override
-    public void carregar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
