@@ -47,6 +47,7 @@ public class FormaDePagamento implements ICadastro {
     }
 
     // </editor-fold> 
+    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">  
     @Override
     public void inserir() {

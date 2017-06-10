@@ -58,21 +58,25 @@ public class Programa {
           end.setId(1);
           cargo.setId(1);
           
-          fun.setId(1);
-          fun.setEndereco(end);
-          fun.setCargo(cargo);
-          fun.setNome("maria");
-          fun.setCpf("1234");
-          fun.setGenero("f");
-          fun.setDataDeNascimento(Validacoes.Funcoes.getData("08/06/2017"));
-          fun.setCelular("99736475");
-          fun.setTelefone("36645364");
-          fun.setEmail("joao@gmail.com");
-          fun.setSalario(1000.00);
-          fun.setDataDeAdmissao(Validacoes.Funcoes.getData("02/03/2017"));
-          fun.setAtivo(true);
+//          fun.setId(1);
+//          fun.setEndereco(end);
+//          fun.setCargo(cargo);
+//          fun.setNome("maria");
+//          fun.setCpf("1234");
+//          fun.setGenero("f");
+//          fun.setDataDeNascimento(Validacoes.Funcoes.getData("08/06/2017"));
+//          fun.setCelular("99736475");
+//          fun.setTelefone("36645364");
+//          fun.setEmail("joao@gmail.com");
+//          fun.setSalario(1000.00);
+//          fun.setDataDeAdmissao(Validacoes.Funcoes.getData("02/03/2017"));
+//          fun.setAtivo(true);
           
-          fun.atualizar();
+          fun.carregarPorId(1);
+          
+          
+          System.out.println("Nome funcionario: "+fun.getNome()+  "id:" +fun.getId());
+          
           
           
           

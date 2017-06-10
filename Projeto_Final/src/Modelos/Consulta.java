@@ -179,17 +179,7 @@ public class Consulta implements ICadastro {
             Banco.leitor = Banco.cmd.executeQuery();
 
             if (Banco.leitor.next()) {
-//                this.id = id;
-//                this.esferico = Banco.leitor.getFloat("esferico");
-//                this.cilindro = Banco.leitor.getFloat("cilindro");
-//                this.adicao = Banco.leitor.getFloat("adicao");
-//                this.eixo = Banco.leitor.getFloat("eixo");
-//                this.ativo = Banco.leitor.getInt("ativo") == 1;
-//
-//                categoria = new Categoria();
-//                categoria.setId(Banco.leitor.getInt("id_categoria"));
-//                categoria.setDescricao(Banco.leitor.getString("categoria"));
-//                categoria.setAtivo(Banco.leitor.getInt("ativo_categoria") == 1);
+              
             }
 
             Banco.cmd.close();

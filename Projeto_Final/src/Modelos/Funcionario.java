@@ -5,12 +5,11 @@ import Validacoes.Excecoes;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class Funcionario extends Pessoa implements ICadastro {
-    
+public class Funcionario extends Pessoa {
+
     private Double salario;
     private Date dataDeAdmissao;
     private Cargo cargo;
-    
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
     public Double getSalario() {
@@ -28,8 +27,7 @@ public class Funcionario extends Pessoa implements ICadastro {
     public void setDataDeAdmissao(Date dataDeAdmissao) {
         this.dataDeAdmissao = dataDeAdmissao;
     }
-    
-    
+
     public Cargo getCargo() {
         return cargo;
     }
@@ -39,9 +37,7 @@ public class Funcionario extends Pessoa implements ICadastro {
     }
 
     //</editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">
- 
     @Override
     public void inserir() {
         try {
@@ -128,55 +124,64 @@ public class Funcionario extends Pessoa implements ICadastro {
 
     @Override
     public void carregarPorId(int id) {
-//        try {
-//            String query
-//                    = "SELECT                                                        "
-//                    + "     diagnosticos.id_categoria,                               "
-//                    + "     diagnosticos.esferico,                                   "
-//                    + "     diagnosticos.cilindro,                                   "
-//                    + "     diagnosticos.adicao,                                     "
-//                    + "     diagnosticos.eixo,                                       "
-//                    + "     diagnosticos.ativo,                                      "
-//                    + "     categorias.id_categoria,                                 "
-//                    + "     categorias.descricao		AS 'categoria',      "
-//                    + "     categorias.ativo                AS 'ativo_categoria'     "
-//                    + "FROM                                                          "
-//                    + "     diagnosticos                                             "
-//                    + "INNER JOIN categorias                                         "
-//                    + "     ON categorias.id_categoria = diagnosticos.id_diagnostico "
-//                    + "WHERE "
-//                    + "     id_diagnostico = ?";
-//
-//            Banco.cmd = Banco.getConexao().prepareStatement(query);
-//            Banco.cmd.setInt(1, id);
-//            Banco.leitor = Banco.cmd.executeQuery();
-//
-//            if (Banco.leitor.next()) {
-////                this.id = id;
-////                this.esferico = Banco.leitor.getFloat("esferico");
-////                this.cilindro = Banco.leitor.getFloat("cilindro");
-////                this.adicao = Banco.leitor.getFloat("adicao");
-////                this.eixo = Banco.leitor.getFloat("eixo");
-////                this.ativo = Banco.leitor.getInt("ativo") == 1;
-////
-////                categoria = new Categoria();
-////                categoria.setId(Banco.leitor.getInt("id_categoria"));
-////                categoria.setDescricao(Banco.leitor.getString("categoria"));
-////                categoria.setAtivo(Banco.leitor.getInt("ativo_categoria") == 1);
-//            }
-//
-//            Banco.cmd.close();
-//        } catch (SQLException ex) {
-//            System.out.println(ex.toString());
-//        }
-    }
+        try {
+            String query
+                    = "SELECT                                             "
+                    + "     id_funcionario,                               "
+                    + "     id_endereco,                                  "
+                    + "     id_cargo,                                     "
+                    + "     nome,                                         "
+                    + "     cpf,                                          "
+                    + "     genero,                                       "
+                    + "     data_de_nascimento,                           "
+                    + "     celular,                                      "
+                    + "     telefone,                                     "
+                    + "     email,                                        "
+                    + "     salario,                                      "
+                    + "     data_de_admissao,                             "
+                    + "    ativo,                                         "
+                    + "FROM                                               "
+                    + "     funcionarios                                  "
+                    + "WHERE id_funcioario = ?                            ";
 
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.cmd.setInt(1, id);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            if (Banco.leitor.next()) {
+                this.id = id;
+                this.endereco = new Endereco();
+                this.cargo = new Cargo();
+
+                this.endereco.setId(Banco.leitor.getInt("id_endereco"));
+                this.cargo.setId(Banco.leitor.getInt("id_cargo"));
+
+                this.nome = Banco.leitor.getString("nome");
+                this.cpf = Banco.leitor.getString("cpf");
+                this.genero = Banco.leitor.getString("genero");
+                this.dataDeNascimento = Banco.leitor.getDate("data_de_nascimento");
+                this.celular = Banco.leitor.getString("celular");
+                this.telefone = Banco.leitor.getString("telefone");
+                this.email = Banco.leitor.getString("email");
+                this.salario = Banco.leitor.getDouble("salario");
+                this.dataDeAdmissao = Banco.leitor.getDate("data_de_admissao");
+                this.ativo = Banco.leitor.getByte("ativo") == 1;
+                
+            }
+
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        
+        endereco.carregar();
+        cargo.carregar();
+    }
 
     @Override
     public void carregar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    // </editor-fold>
 
+    // </editor-fold>
 }

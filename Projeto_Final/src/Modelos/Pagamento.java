@@ -185,6 +185,8 @@ public class Pagamento implements ICadastro {
             }
 
             Banco.cmd.close();
+            consulta.carregar();
+            formaDePagamento.carregar();
         } catch (SQLException ex) {
             Excecoes.mostrarExcecoes(ex);
         }
