@@ -1,19 +1,7 @@
 package Constantes;
 
-public enum StatusConsulta {
-    Finalizada("F"), Atrazada("A");
+public class StatusConsulta {
 
-    public String status;
-
-    StatusConsulta(String status) {
-        this.status = status;
-    }
-
-    public static String getStatus(StatusConsulta valor) {
-        if (valor == Finalizada) {
-            return "F";
-        }
-
-        return "A";
-    }
+    public final String Finalizada = "F";
+    public final String Atrazada = "A";
 }

@@ -14,7 +14,7 @@ public class Consulta implements ICadastro {
     private Date data;
     private Time horario;
     private double valor;
-    private Constantes.StatusConsulta status;
+    private String status;
     private boolean ativo;
 
     // <editor-fold defaultstate="collapsed" desc="GETTERS E SETTERS">  
@@ -66,11 +66,11 @@ public class Consulta implements ICadastro {
         this.valor = valor;
     }
 
-    public Constantes.StatusConsulta getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Constantes.StatusConsulta status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -83,7 +83,8 @@ public class Consulta implements ICadastro {
     }
 
     //</editor-fold>
-  
+    
+    // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER, CARREGAR POR ID E CARREGAR">  
     @Override
     public void inserir() {
         try {
@@ -100,7 +101,7 @@ public class Consulta implements ICadastro {
             Banco.cmd.setDate(3, Validacoes.Funcoes.converterData(this.data));
             Banco.cmd.setTime(4, this.horario);
             Banco.cmd.setDouble(5, this.valor);
-            Banco.cmd.setString(6, Constantes.StatusConsulta.getStatus(this.status));
+            Banco.cmd.setString(6, this.status);
             Banco.cmd.setInt(7, this.ativo ? 1 : 0);
             Banco.leitor = Banco.cmd.executeQuery();
 
@@ -119,7 +120,7 @@ public class Consulta implements ICadastro {
     public void atualizar() {
         try {
             String query
-                    = "UPDATE consultas SET    "
+                    = "UPDATE consultas  SET   "
                     + "	  id_cliente     = ?,  "
                     + "	  id_medico      = ?,  "
                     + "	  data           = ?,  "
@@ -128,7 +129,7 @@ public class Consulta implements ICadastro {
                     + "	  status	 = ?,  "
                     + "	  ativo		 = ?   "
                     + "WHERE                   "
-                    + "	   id_consulta = ?";
+                    + "	   id_consulta   = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.cliente.getId());
@@ -136,7 +137,7 @@ public class Consulta implements ICadastro {
             Banco.cmd.setDate(3, Validacoes.Funcoes.converterData(this.data));
             Banco.cmd.setTime(4, this.horario);
             Banco.cmd.setDouble(5, this.valor);
-            Banco.cmd.setString(6, Constantes.StatusConsulta.getStatus(this.status));
+            Banco.cmd.setString(6, this.status);
             Banco.cmd.setInt(7, this.ativo ? 1 : 0);
             Banco.cmd.setInt(8, this.id);
 
@@ -154,32 +155,43 @@ public class Consulta implements ICadastro {
     }
 
     @Override
+    public void carregar() {
+        carregarPorId(this.id);
+    }
+
+    @Override
     public void carregarPorId(int id) {
         try {
             String query
-                    = "SELECT                                                        "
-                    + "     diagnosticos.id_categoria,                               "
-                    + "     diagnosticos.esferico,                                   "
-                    + "     diagnosticos.cilindro,                                   "
-                    + "     diagnosticos.adicao,                                     "
-                    + "     diagnosticos.eixo,                                       "
-                    + "     diagnosticos.ativo,                                      "
-                    + "     categorias.id_categoria,                                 "
-                    + "     categorias.descricao            AS 'categoria',      "
-                    + "     categorias.ativo                AS 'ativo_categoria'     "
-                    + "FROM                                                          "
-                    + "     diagnosticos                                             "
-                    + "INNER JOIN categorias                                         "
-                    + "     ON categorias.id_categoria = diagnosticos.id_diagnostico "
-                    + "WHERE "
-                    + "     id_diagnostico = ?";
+                    = "SELECT               "
+                    + "	  id_cliente,       "
+                    + "	  id_medico,        "
+                    + "	  data,             "
+                    + "	  horario,          "
+                    + "	  valor,            "
+                    + "	  status,           "
+                    + "	  ativo             "
+                    + "FROM                 "
+                    + "	  consultas         "
+                    + "WHERE                "
+                    + "	  id_consulta = ?";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, id);
             Banco.leitor = Banco.cmd.executeQuery();
 
             if (Banco.leitor.next()) {
+                this.id = id;
+                this.cliente = new Cliente();
+                this.medico = new Funcionario();
 
+                this.cliente.setId(Banco.leitor.getInt("id_cliente"));
+                this.medico.setId(Banco.leitor.getInt("id_medico"));
+                this.data = Validacoes.Funcoes.converterData(Banco.leitor.getDate("data"));
+                this.horario = Banco.leitor.getTime("horario");
+                this.valor = Banco.leitor.getDouble("valor");
+                this.status = Banco.leitor.getString("status");
+                this.ativo = Banco.leitor.getByte("ativo") == 1;
             }
 
             Banco.cmd.close();
@@ -187,11 +199,7 @@ public class Consulta implements ICadastro {
             System.out.println(ex.toString());
         }
     }
-
-    @Override
-    public void carregar() {
-        carregarPorId(this.id);
-    }
+    //</editor-fold>
 
     public static void trocar(Consulta consultaA, Consulta consultaB) {
         Consulta consultaTemp = consultaA;
