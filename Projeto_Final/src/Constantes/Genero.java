@@ -1,20 +1,16 @@
 package Constantes;
 
-public enum Genero {
-    Masculino("M"), Feminino("F");
+public class Genero {
 
-    public String sexo;
-
-    Genero(String sexo) {
-        this.sexo = sexo;
-    }
+    public static final String masculino = "M";
+    public static final String feminino = "F";
 
     public static boolean isMasculino(String genero) {
-        return Masculino.toString().equals(genero);
+        return genero.equals(masculino);
     }
 
     public static boolean isFeminino(String genero) {
-        return Feminino.toString().equals(genero);
+        return genero.equals(feminino);
     }
 
     public static String getNome(String genero) {

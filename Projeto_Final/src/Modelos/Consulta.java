@@ -198,6 +198,9 @@ public class Consulta implements ICadastro {
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
+        
+        this.cliente.carregar();
+        this.medico.carregar();
     }
     //</editor-fold>
 

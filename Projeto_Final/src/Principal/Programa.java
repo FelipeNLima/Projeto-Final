@@ -4,10 +4,10 @@ import Modelos.*;
 import java.sql.Time;
 
 public class Programa {
-
+    
     public static void main(String[] args) {
         Consulta c = new Consulta();
-
+        
         Cliente cli = new Cliente();
 //        Funcionario medico = new Funcionario();
 //        medico.carregarPorId(4);
@@ -23,7 +23,8 @@ public class Programa {
 //        
 //        c.setId(8);
 
-        c.setValor(700);
-        c.atualizar();
+        c.carregarPorId(8);
+        
+        Validacoes.Mensagens.mostrarAviso(c.getCliente().getNome() + "\n" + c.getData());
     }
 }
