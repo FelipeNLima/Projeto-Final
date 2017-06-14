@@ -16,6 +16,18 @@ public class Mensagens {
         mostrarMsg(texto, "Aviso");
     }
 
+    public static void campoNaoPreenchido(String campo) {
+        mostrarMsg("Por favor, preecha o campo '" + campo + "'.", "Aviso");
+    }
+
+    public static void linhaNaoSelecionada() {
+        mostrarMsg("Por favor, selecione uma linha da tabela!", "Aviso");
+    }
+
+    public static void sucesso() {
+        mostrarMsg("Cadastrado com Sucesso!", "Aviso");
+    }
+
     public static int mostrarDesejaRemover() {
         return mostrarConfirmacao("Tem certeza que deseja remover esse registro?", "Aviso");
     }

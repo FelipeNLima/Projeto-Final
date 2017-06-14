@@ -167,5 +167,40 @@ public class Cargo implements ICadastro {
 
         return lista;
     }
-    // </editor-fold> 
+
+    public static ArrayList<Cargo> filtrarPorDescricao(String descricao) {
+        ArrayList<Cargo> lista = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT                   "
+                    + "     id_cargo,           "
+                    + "     descricao           "
+                    + "FROM                     "
+                    + "     cargos              "
+                    + "WHERE                    "
+                    + "     ativo = 1           "
+                    + "     AND                 "
+                    + "     descricao LIKE '%" + descricao + "%'";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            while (Banco.leitor.next()) {
+                Cargo cargo = new Cargo();
+                cargo.setId(Banco.leitor.getInt("id_cargo"));
+                cargo.setDescricao(Banco.leitor.getString("descricao"));
+
+                lista.add(cargo);
+            }
+
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+            Excecoes.mostrarExcecoes(ex);
+        }
+
+        return lista;
+    }
+
+// </editor-fold> 
 }
