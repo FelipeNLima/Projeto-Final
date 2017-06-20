@@ -1,48 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Telas;
 
 import Modelos.FormaDePagamento;
+import javax.swing.JTable;
 
-/**
- *
- * @author via varejo
- */
 public class frmFormaPagamento extends javax.swing.JFrame {
-    
+
+    public JTable tabela;
     private boolean cadastrar;
     private int id;
-    
+
     public frmFormaPagamento() {
         initComponents();
         cadastrar = true;
-        setTitle("Cadastrar Forma de Pagamento");
-    
+        setTitle("Cadastrar");
     }
-    
+
     public frmFormaPagamento(int id) {
         initComponents();
         this.id = id;
         carregarDados();
         cadastrar = false;
-        setTitle("Editar Forma de Pagamento");
+        setTitle("Editar");
     }
-    
+
     private void fechar() {
         setVisible(false);
         dispose();
     }
-    
+
+    private void carregarTabela() {
+        frmFormaPagamentoPrincipal.carregarDados(tabela, "");
+    }
+
     private void carregarDados() {
         FormaDePagamento f = new FormaDePagamento();
         f.carregarPorId(id);
 
         tbDescricao.setText(f.getDescricao());
     }
-    
+
     private FormaDePagamento converteParaObj() {
         FormaDePagamento f = new FormaDePagamento();
         f.setId(id);
@@ -51,8 +47,8 @@ public class frmFormaPagamento extends javax.swing.JFrame {
 
         return f;
     }
-    
-        private void mantemDados() {
+
+    private void mantemDados() {
         FormaDePagamento f = converteParaObj();
 
         if (cadastrar) {
@@ -70,7 +66,7 @@ public class frmFormaPagamento extends javax.swing.JFrame {
 
         return true;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,7 +76,7 @@ public class frmFormaPagamento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tbDescricao = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/Save_16x16.png"))); // NOI18N
@@ -146,9 +142,9 @@ public class frmFormaPagamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       if (validar()) {
+        if (validar()) {
             mantemDados();
-            Validacoes.Mensagens.sucesso();
+            carregarTabela();
             fechar();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -158,7 +154,7 @@ public class frmFormaPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmFormaPagamento().setVisible(true);

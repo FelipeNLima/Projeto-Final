@@ -1,30 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Telas;
 
 import Modelos.FormaDePagamento;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author via varejo
- */
 public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
 
     public frmFormaPagamentoPrincipal() {
         initComponents();
         tabela.getColumnModel().getColumn(0).setPreferredWidth(60);
-        carregarDados();
+        carregarDadosTabela();
     }
 
-    private void carregarDados() {
-        ArrayList<FormaDePagamento> lista = FormaDePagamento.filtrarPorDescricao(tbPesquisa.getText());
+    public void carregarDadosTabela() {
+        carregarDados(tabela, tbPesquisa.getText());
+    }
+
+    public static void carregarDados(JTable tabela, String descricao) {
+        ArrayList<FormaDePagamento> lista = FormaDePagamento.filtrarPorDescricao(descricao);
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);
 
@@ -35,38 +31,45 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
             });
         }
         tabela.setModel(model);
-        lbNumeroRegistros.setText(lista.size() + "");
     }
-    
+
     private void remover() {
         if (tabela.getSelectedRow() >= 0) {
             int op = Validacoes.Mensagens.mostrarDesejaRemover();
-//                Validacoes.Mensagens.mostrarAviso(op + "\n" + JOptionPane.YES_OPTION + "\n" + JOptionPane.NO_OPTION);
 
             if (op == JOptionPane.YES_OPTION) {
                 int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+
                 FormaDePagamento f = new FormaDePagamento();
                 f.carregarPorId(id);
-//                    c.remover();
-//                    tabela.remove(tabela.getSelectedRow());
+                f.remover();
+                carregarDadosTabela();
             }
         } else {
             Validacoes.Mensagens.linhaNaoSelecionada();
         }
     }
-    
+
+    private void cadastrar() {
+        Telas.frmFormaPagamento fPag = new Telas.frmFormaPagamento();
+        fPag.tabela = this.tabela;
+        fPag.setVisible(true);
+    }
+
     private void editar() {
         int linha = tabela.getSelectedRow();
 
         if (linha >= 0) {
             int id = Integer.parseInt(tabela.getValueAt(linha, 0).toString());
-            new Telas.frmFormaPagamento(id).setVisible(true);
-            carregarDados();
+
+            Telas.frmFormaPagamento fPag = new Telas.frmFormaPagamento(id);
+            fPag.tabela = tabela;
+            fPag.setVisible(true);
         } else {
             Validacoes.Mensagens.linhaNaoSelecionada();
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,12 +81,11 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        lbNumeroRegistros = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Forma de Pagamento");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setType(java.awt.Window.Type.UTILITY);
 
@@ -163,11 +165,6 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
             tabela.getColumnModel().getColumn(0).setMaxWidth(60);
         }
 
-        jLabel1.setText("Registros encontrados:");
-
-        lbNumeroRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbNumeroRegistros.setText("000");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,11 +178,7 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNumeroRegistros)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -199,13 +192,9 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lbNumeroRegistros))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -214,13 +203,12 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
 
     private void tbPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPesquisaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            carregarDados();
+            carregarDadosTabela();
         }
     }//GEN-LAST:event_tbPesquisaKeyPressed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        new Telas.frmFormaPagamento().setVisible(true);
-        carregarDados();
+        cadastrar();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -233,9 +221,8 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaKeyPressed
 
-   
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmFormaPagamentoPrincipal().setVisible(true);
@@ -247,10 +234,8 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
     protected javax.swing.JButton btnEditar;
     protected javax.swing.JButton btnNovo;
     private javax.swing.JComboBox<String> jComboBox1;
-    protected javax.swing.JLabel jLabel1;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JScrollPane jScrollPane1;
-    protected javax.swing.JLabel lbNumeroRegistros;
     private javax.swing.JTable tabela;
     public javax.swing.JTextField tbPesquisa;
     // End of variables declaration//GEN-END:variables

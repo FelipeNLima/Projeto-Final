@@ -1,15 +1,14 @@
 package Telas;
 
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 public class frmPrincipal extends javax.swing.JFrame {
-
+    
     public frmPrincipal() {
         initComponents();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,7 +100,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/Customer_32x32.png"))); // NOI18N
-        jLabel2.setText("Cliente");
+        jLabel2.setText("Clientes");
         jLabel2.setToolTipText("");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -126,7 +125,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         lbCargo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/LabelsOutsideEnd_32x32.png"))); // NOI18N
-        lbCargo.setText("Cargo");
+        lbCargo.setText("Cargos");
         lbCargo.setToolTipText("");
         lbCargo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbCargo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -141,7 +140,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/Contact_32x32.png"))); // NOI18N
-        jLabel4.setText("Usuário");
+        jLabel4.setText("Usuários");
         jLabel4.setToolTipText("");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -314,7 +313,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lbformaDePagamentoMouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new Telas.frmfaturamento().setVisible(true);
+        new Telas.frmFaturamento().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
     public static void main(String args[]) {
         //</editor-fold>
