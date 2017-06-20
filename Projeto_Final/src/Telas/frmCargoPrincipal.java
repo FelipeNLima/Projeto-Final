@@ -4,6 +4,7 @@ import Modelos.Cargo;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class frmCargoPrincipal extends javax.swing.JFrame {
@@ -11,11 +12,16 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
     public frmCargoPrincipal() {
         initComponents();
         tabela.getColumnModel().getColumn(0).setPreferredWidth(60);
-        carregarDados();
+        carregarDadosTabela();
     }
 
-    private void carregarDados() {
-        ArrayList<Cargo> lista = Cargo.filtrarPorDescricao(tbPesquisa.getText());
+    // <editor-fold defaultstate="collapsed" desc="CARREGAR">                          
+    public void carregarDadosTabela() {
+        carregarDados(tabela, tbPesquisa.getText());
+    }
+
+    public static void carregarDados(JTable tabela, String descricao) {
+        ArrayList<Cargo> lista = Cargo.filtrarPorDescricao(descricao);
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);
 
@@ -26,20 +32,22 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
             });
         }
         tabela.setModel(model);
-        lbNumeroRegistros.setText(lista.size() + "");
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="REMOVER, EDITAR E CADASTRAR">                          
     private void remover() {
         if (tabela.getSelectedRow() >= 0) {
             int op = Validacoes.Mensagens.mostrarDesejaRemover();
-//                Validacoes.Mensagens.mostrarAviso(op + "\n" + JOptionPane.YES_OPTION + "\n" + JOptionPane.NO_OPTION);
 
             if (op == JOptionPane.YES_OPTION) {
-                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+                int index = tabela.getSelectedRow();
+                int id = Integer.parseInt(tabela.getValueAt(index, 0).toString());
                 Cargo c = new Cargo();
                 c.carregarPorId(id);
-//                    c.remover();
-//                    tabela.remove(tabela.getSelectedRow());
+                c.remover();
+                carregarDadosTabela();
             }
         } else {
             Validacoes.Mensagens.linhaNaoSelecionada();
@@ -51,12 +59,21 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
 
         if (linha >= 0) {
             int id = Integer.parseInt(tabela.getValueAt(linha, 0).toString());
-            new Telas.frmCargo(id).setVisible(true);
-            carregarDados();
+            Telas.frmCargo fCargo = new Telas.frmCargo(id);
+            fCargo.tabela = this.tabela;
+            fCargo.setVisible(true);
         } else {
             Validacoes.Mensagens.linhaNaoSelecionada();
         }
+
     }
+
+    private void cadastrar() {
+        Telas.frmCargo fCargo = new Telas.frmCargo();
+        fCargo.tabela = this.tabela;
+        fCargo.setVisible(true);
+    }
+    // </editor-fold>
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -69,10 +86,7 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        lbNumeroRegistros = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cargo");
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
@@ -153,11 +167,6 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
             tabela.getColumnModel().getColumn(0).setMaxWidth(60);
         }
 
-        jLabel1.setText("Registros encontrados:");
-
-        lbNumeroRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbNumeroRegistros.setText("000");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -171,11 +180,7 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNumeroRegistros)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -189,13 +194,9 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lbNumeroRegistros))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,19 +224,20 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="EVENTOS">                          
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tbPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPesquisaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            carregarDados();
+            carregarDadosTabela();
         }
     }//GEN-LAST:event_tbPesquisaKeyPressed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        new Telas.frmCargo().setVisible(true);
-        carregarDados();
+        cadastrar();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void tabelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaKeyPressed
@@ -243,6 +245,7 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
             remover();
         }
     }//GEN-LAST:event_tabelaKeyPressed
+    // </editor-fold>
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -278,11 +281,9 @@ public class frmCargoPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btnEditar;
     protected javax.swing.JButton btnNovo;
-    protected javax.swing.JLabel jLabel1;
     protected javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     protected javax.swing.JScrollPane jScrollPane1;
-    protected javax.swing.JLabel lbNumeroRegistros;
     private javax.swing.JTable tabela;
     public javax.swing.JTextField tbPesquisa;
     // End of variables declaration//GEN-END:variables
