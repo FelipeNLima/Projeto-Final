@@ -52,13 +52,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/GridHorizontalLines_32x32.png"))); // NOI18N
-        jLabel5.setText("Pagamentos");
+        jLabel5.setText("Faturamento");
         jLabel5.setToolTipText("");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel5.setRequestFocusEnabled(false);
         jLabel5.setVerifyInputWhenFocusTarget(false);
         jLabel5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         lbformaDePagamento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbformaDePagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/ContentArrangeInRows_32x32.png"))); // NOI18N
@@ -298,6 +303,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void lbformaDePagamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbformaDePagamentoMouseClicked
        new Telas.frmFormaPagamentoPrincipal().setVisible(true);
     }//GEN-LAST:event_lbformaDePagamentoMouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        new Telas.frmfaturamento().setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
     
     public static void main(String args[]) {
         //</editor-fold>

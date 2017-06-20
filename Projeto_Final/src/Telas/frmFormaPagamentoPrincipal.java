@@ -71,6 +71,7 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         tbPesquisa = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
@@ -79,6 +80,8 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lbNumeroRegistros = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -243,6 +246,7 @@ public class frmFormaPagamentoPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btnEditar;
     protected javax.swing.JButton btnNovo;
+    private javax.swing.JComboBox<String> jComboBox1;
     protected javax.swing.JLabel jLabel1;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JScrollPane jScrollPane1;
