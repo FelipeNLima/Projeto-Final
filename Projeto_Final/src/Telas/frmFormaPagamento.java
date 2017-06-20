@@ -1,61 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Telas;
 
-import Modelos.Cargo;
-import javax.swing.JTable;
+import Modelos.FormaDePagamento;
 
-public class frmCargo extends javax.swing.JFrame {
-
-    public JTable tabela;
+/**
+ *
+ * @author via varejo
+ */
+public class frmFormaPagamento extends javax.swing.JFrame {
+    
     private boolean cadastrar;
-    private frmCargoPrincipal frm;
     private int id;
-
-    public frmCargo() {
+    
+    public frmFormaPagamento() {
         initComponents();
         cadastrar = true;
-        setTitle("Cadastrar Cargo");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Forma de Pagamento");
+    
     }
-
-    public frmCargo(int id) {
+    
+    public frmFormaPagamento(int id) {
         initComponents();
         this.id = id;
         carregarDados();
         cadastrar = false;
-        setTitle("Editar Cargo");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Editar Forma de Pagamento");
     }
-
+    
     private void fechar() {
-        this.dispose();
+        setVisible(false);
+        dispose();
     }
-
+    
     private void carregarDados() {
-        Cargo c = new Cargo();
-        c.carregarPorId(id);
+        FormaDePagamento f = new FormaDePagamento();
+        f.carregarPorId(id);
 
-        tbDescricao.setText(c.getDescricao());
+        tbDescricao.setText(f.getDescricao());
     }
+    
+    private FormaDePagamento converteParaObj() {
+        FormaDePagamento f = new FormaDePagamento();
+        f.setId(id);
+        f.setDescricao(tbDescricao.getText());
+        f.setAtivo(true);
 
-    private Cargo converteParaObj() {
-        Cargo c = new Cargo();
-        c.setId(id);
-        c.setDescricao(tbDescricao.getText());
-        c.setAtivo(true);
-
-        return c;
+        return f;
     }
-
-    private void mantemDados() {
-        Cargo c = converteParaObj();
+    
+        private void mantemDados() {
+        FormaDePagamento f = converteParaObj();
 
         if (cadastrar) {
-            c.inserir();
+            f.inserir();
         } else {
-            c.atualizar();
+            f.atualizar();
         }
-
-        carregarTabela();
     }
 
     private boolean validar() {
@@ -66,11 +70,7 @@ public class frmCargo extends javax.swing.JFrame {
 
         return true;
     }
-
-    private void carregarTabela() {
-        frmCargoPrincipal.carregarDados(tabela, "");
-    }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,13 +80,8 @@ public class frmCargo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tbDescricao = new javax.swing.JTextField();
 
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/Save_16x16.png"))); // NOI18N
         btnSalvar.setText("Salvar");
@@ -123,13 +118,13 @@ public class frmCargo extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCancelar))
-                            .addComponent(tbDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(96, 96, 96)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tbDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,49 +145,23 @@ public class frmCargo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="EVENTOS">  
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+       if (validar()) {
+            mantemDados();
+            Validacoes.Mensagens.sucesso();
+            fechar();
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         fechar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (validar()) {
-            mantemDados();
-            fechar();
-        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-    }//GEN-LAST:event_formKeyPressed
-// </editor-fold> 
-
     public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmCargo().setVisible(true);
+                new frmFormaPagamento().setVisible(true);
             }
         });
     }

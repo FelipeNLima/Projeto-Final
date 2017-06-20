@@ -165,6 +165,40 @@ public class Categoria implements ICadastro {
 
         return lista;
     }
+    
+     public static ArrayList<Categoria> filtrarPorDescricao(String descricao) {
+        ArrayList<Categoria> lista = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT                   "
+                    + "     id_categoria,       "
+                    + "     descricao           "
+                    + "FROM                     "
+                    + "     categorias          "
+                    + "WHERE                    "
+                    + "     ativo = 1           "
+                    + "     AND                 "
+                    + "     descricao LIKE '%" + descricao + "%'";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            while (Banco.leitor.next()) {
+                Categoria c = new Categoria();
+                c.setId(Banco.leitor.getInt("id_categoria"));
+                c.setDescricao(Banco.leitor.getString("descricao"));
+
+                lista.add(c);
+            }
+
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+            Excecoes.mostrarExcecoes(ex);
+        }
+
+        return lista;
+    }
 
 // </editor-fold> 
 }

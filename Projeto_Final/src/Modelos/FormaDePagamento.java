@@ -3,6 +3,7 @@ package Modelos;
 import BaseDeDados.Banco;
 import Validacoes.Excecoes;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FormaDePagamento implements ICadastro {
 
@@ -55,7 +56,7 @@ public class FormaDePagamento implements ICadastro {
             String query
                     = "INSERT INTO forma_de_pagamento        "
                     + "	  (descricao, ativo)                 "
-                    + "OUTPUT inserted.id_forma_de_pagamento "
+                    + "OUTPUT inserted.id_forma_pagamento "
                     + "VALUES                                "
                     + "	  (? , ?)";
 
@@ -82,7 +83,7 @@ public class FormaDePagamento implements ICadastro {
                     + "	  descricao  = ?,            "
                     + "	  ativo	     = ?             "
                     + "WHERE                         "
-                    + "	  id_forma_de_pagamento = ?  ";
+                    + "	  id_forma_pagamento = ?  ";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setString(1, this.descricao);
@@ -136,4 +137,38 @@ public class FormaDePagamento implements ICadastro {
         }
     }
     // </editor-fold> 
+    
+    public static ArrayList<FormaDePagamento> filtrarPorDescricao(String descricao) {
+        ArrayList<FormaDePagamento> lista = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT                   "
+                    + "     id_forma_pagamento, "
+                    + "     descricao           "
+                    + "FROM                     "
+                    + "    forma_de_pagamento   "
+                    + "WHERE                    "
+                    + "     ativo = 1           "
+                    + "     AND                 "
+                    + "     descricao LIKE '%" + descricao + "%'";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            while (Banco.leitor.next()) {
+                FormaDePagamento forma = new FormaDePagamento();
+                forma.setId(Banco.leitor.getInt("id_forma_pagamento"));
+                forma.setDescricao(Banco.leitor.getString("descricao"));
+
+                lista.add(forma);
+            }
+
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+            Excecoes.mostrarExcecoes(ex);
+        }
+
+        return lista;
+    }
 }

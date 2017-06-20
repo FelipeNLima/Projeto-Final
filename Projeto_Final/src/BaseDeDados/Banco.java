@@ -14,7 +14,7 @@ public class Banco {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(ConfiguracaoBanco.getStringDeConexao());
         } catch (Exception ex) {
-            System.out.println(ex.toString());
+           Validacoes.Mensagens.mostrarAviso(ex.toString());
         }
 
         return con;
