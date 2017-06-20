@@ -3,12 +3,12 @@ package Telas;
 import javax.swing.JFrame;
 
 public class frmPrincipal extends javax.swing.JFrame {
-    
+
     public frmPrincipal() {
         initComponents();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,6 +163,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel3.setRequestFocusEnabled(false);
         jLabel3.setVerifyInputWhenFocusTarget(false);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         lbCargo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/LabelsOutsideEnd_32x32.png"))); // NOI18N
@@ -377,6 +382,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        new Telas.frmFuncionarioPrincipal().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3MouseClicked
     public static void main(String args[]) {
         //</editor-fold>
 
