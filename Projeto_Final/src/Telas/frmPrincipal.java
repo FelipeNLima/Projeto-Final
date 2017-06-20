@@ -98,6 +98,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel2.setRequestFocusEnabled(false);
         jLabel2.setVerifyInputWhenFocusTarget(false);
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/BOEmployee_32x32.png"))); // NOI18N
@@ -289,6 +294,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Telas.frmCargoPrincipal().setVisible(true);
     }//GEN-LAST:event_lbCargoMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        new Telas.frmClientePrincipal().setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
     
     public static void main(String args[]) {
         //</editor-fold>
