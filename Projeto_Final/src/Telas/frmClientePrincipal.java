@@ -17,26 +17,49 @@ public class frmClientePrincipal extends javax.swing.JFrame {
     }
 
     // <editor-fold defaultstate="collapsed" desc="CARREGAR">                          
-    public void carregarDadosTabela() {
-        carregarDados(tabela, tbPesquisa.getText());
+    private String getChave() {
+        int index = cbFiltro.getSelectedIndex();
+
+        if (index == 0) {
+            return "nome";
+        } else if (index == 1) {
+            return "cpf";
+        } else if (index == 2) {
+            return "telefone";
+        } else if (index == 3) {
+            return "celular";
+        }
+
+        return "email";
     }
 
-    public static void carregarDados(JTable tabela, String descricao) {
-        ArrayList<Cargo> lista = Cargo.filtrarPorDescricao(descricao);
+    private void carregarDadosTabela() {
+        carregarDados(tabela, getChave(), tbPesquisa.getText());
+    }
+
+    public static void carregarDados(JTable tabela) {
+        carregarDados(tabela, "nome", "");
+    }
+
+    public static void carregarDados(JTable tabela, String chave, String pesquisa) {
+        ArrayList<Cliente> lista = Cliente.filtrar(chave, pesquisa);
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);
 
-        for (Cargo c : lista) {
+        for (Cliente c : lista) {
             model.addRow(new Object[]{
                 c.getId(),
-                c.getDescricao()
-            });
+                c.getNome(),
+                c.getGenero(),
+                c.getTelefone(),
+                c.getCelular(),
+                c.getEndereco().getCidade(),});
         }
+
         tabela.setModel(model);
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="REMOVER, EDITAR E CADASTRAR">                          
     private void remover() {
         if (tabela.getSelectedRow() >= 0) {
@@ -81,7 +104,7 @@ public class frmClientePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbFiltro = new javax.swing.JComboBox<>();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -90,11 +113,12 @@ public class frmClientePrincipal extends javax.swing.JFrame {
         tbPesquisa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Clientes");
         setType(java.awt.Window.Type.UTILITY);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar por"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Telefone", "Celular", "E-Mail" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Telefone", "Celular", "E-Mail" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,14 +126,14 @@ public class frmClientePrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, 204, Short.MAX_VALUE)
+                .addComponent(cbFiltro, 0, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -141,11 +165,11 @@ public class frmClientePrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Descrição"
+                "Código", "Nome", "Gênero", "Telefone", "Celular", "Cidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -158,6 +182,20 @@ public class frmClientePrincipal extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setMinWidth(50);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tabela.getColumnModel().getColumn(0).setMaxWidth(50);
+            tabela.getColumnModel().getColumn(2).setMinWidth(50);
+            tabela.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tabela.getColumnModel().getColumn(2).setMaxWidth(50);
+            tabela.getColumnModel().getColumn(3).setMinWidth(80);
+            tabela.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tabela.getColumnModel().getColumn(3).setMaxWidth(80);
+            tabela.getColumnModel().getColumn(4).setMinWidth(80);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tabela.getColumnModel().getColumn(4).setMaxWidth(80);
+        }
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
@@ -237,7 +275,9 @@ public class frmClientePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaKeyPressed
 
     private void tbPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPesquisaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            carregarDadosTabela();
+        }
     }//GEN-LAST:event_tbPesquisaKeyPressed
     // </editor-fold>
 
@@ -274,7 +314,7 @@ public class frmClientePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btnEditar;
     protected javax.swing.JButton btnNovo;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbFiltro;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JPanel jPanel3;
     protected javax.swing.JScrollPane jScrollPane1;

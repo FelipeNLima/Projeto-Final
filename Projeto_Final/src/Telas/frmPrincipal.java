@@ -232,6 +232,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         lbNovaConsulta.setRequestFocusEnabled(false);
         lbNovaConsulta.setVerifyInputWhenFocusTarget(false);
         lbNovaConsulta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lbNovaConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNovaConsultaMouseClicked(evt);
+            }
+        });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/Edit_32x32.png"))); // NOI18N
@@ -385,8 +390,14 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         new Telas.frmFuncionarioPrincipal().setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void lbNovaConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNovaConsultaMouseClicked
+        Telas.frmConsulta fConsulta = new Telas.frmConsulta();
+        fConsulta.tabela = this.jTable1;
+        
+        fConsulta.setVisible(true);
+    }//GEN-LAST:event_lbNovaConsultaMouseClicked
     public static void main(String args[]) {
         //</editor-fold>
 

@@ -2,6 +2,7 @@ package Modelos;
 
 import BaseDeDados.Banco;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Cliente extends Pessoa {
 
@@ -10,7 +11,7 @@ public class Cliente extends Pessoa {
     public void inserir() {
 
         try {
-            String query 
+            String query
                     = "INSERT INTO clientes                                                                       "
                     + "    (id_endereco, nome, cpf, genero, data_de_nascimento, celular, telefone, email, ativo)  "
                     + "OUTPUT inserted.id_cliente                                                                 "
@@ -57,7 +58,6 @@ public class Cliente extends Pessoa {
                     + " WHERE                        "
                     + "     id_cliente = ?";
 
-            Validacoes.Mensagens.mostrarAviso(this.endereco.getId() + "");
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, this.endereco.getId());
             Banco.cmd.setString(2, this.nome);
@@ -75,7 +75,6 @@ public class Cliente extends Pessoa {
         } catch (SQLException ex) {
             Validacoes.Mensagens.mostrarAviso(ex.toString());
         }
-
     }
 
     @Override
@@ -133,6 +132,61 @@ public class Cliente extends Pessoa {
         }
 
         this.endereco.carregar();
+    }
+
+    public static ArrayList<Cliente> filtrar(String chave, String pesquisa) {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT                   "
+                    + "     id_cliente,         "
+                    + "     id_endereco,        "
+                    + "     nome,               "
+                    + "     cpf,                "
+                    + "     genero,             "
+                    + "     data_de_nascimento, "
+                    + "     celular,            "
+                    + "     telefone,           "
+                    + "     email               "
+                    + "FROM                     "
+                    + "     clientes            "
+                    + "WHERE                    "
+                    + "     clientes.ativo = 1  "
+                    + "     AND                 "
+                    + "     " + chave + " LIKE '%" + pesquisa + "%'";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            while (Banco.leitor.next()) {
+                Cliente c = new Cliente();
+                c.endereco = new Endereco();
+
+                c.setId(Banco.leitor.getInt("id_cliente"));
+                c.endereco.setId(Banco.leitor.getInt("id_endereco"));
+                c.nome = Banco.leitor.getString("nome");
+                c.cpf = Banco.leitor.getString("cpf");
+                c.genero = Banco.leitor.getString("genero");
+                c.dataDeNascimento = Banco.leitor.getDate("data_de_nascimento");
+                c.celular = Banco.leitor.getString("celular");
+                c.telefone = Banco.leitor.getString("telefone");
+                c.email = Banco.leitor.getString("email");
+                c.ativo = true;
+
+                clientes.add(c);
+            }
+
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+            Validacoes.Mensagens.mostrarAviso(ex.toString());
+        }
+
+        for (Cliente c : clientes) {
+            c.getEndereco().carregar();
+        }
+
+        return clientes;
     }
     // </editor-fold>
 }

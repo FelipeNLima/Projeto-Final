@@ -25,7 +25,6 @@ public abstract class Pessoa  implements ICadastro{
         this.id = id;
     }
 
-    
     public Endereco getEndereco() {
         return endereco;
     }
