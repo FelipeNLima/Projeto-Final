@@ -36,6 +36,9 @@ public class Funcoes {
     }
 
     public static java.sql.Date converterData(java.util.Date dtUtil) {
+        if(dtUtil == null)
+            return null;
+        
         java.sql.Date dtSql = new java.sql.Date(dtUtil.getTime());
         dtSql.setDate(dtUtil.getDate());
         dtSql.setMonth(dtUtil.getMonth());
