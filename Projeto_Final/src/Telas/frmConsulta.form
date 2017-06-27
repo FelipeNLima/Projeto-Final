@@ -26,25 +26,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" min="-2" pref="554" max="-2" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
-              <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="354" max="-2" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane1" min="-2" pref="421" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="432" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,8 +84,8 @@
                           <Component id="jPanel5" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jPanel3" max="32767" attributes="0"/>
+                                  <Component id="jPanel6" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                           </Group>
@@ -88,13 +97,13 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                       <Component id="jPanel6" min="-2" pref="71" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -286,12 +295,12 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel12" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="tbCep1" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="tbCep" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tbLogradouro1" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                                      <Component id="tbLogradouro" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -301,9 +310,9 @@
                                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="tbNumero1" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="tbNumero" min="-2" pref="60" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tbComplemento1" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="tbComplemento" min="-2" pref="92" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -311,7 +320,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel19" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
-                                      <Component id="tbBairro1" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
+                                      <Component id="tbBairro" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -319,12 +328,12 @@
                                           <Component id="jLabel20" min="-2" pref="44" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="tbCidade1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tbCidade" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel21" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Component id="cbUf1" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="cbUf" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -343,10 +352,10 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="tbLogradouro1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="tbCep1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="tbNumero1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="tbComplemento1" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbLogradouro" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbCep" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbNumero" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbComplemento" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -358,11 +367,10 @@
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="cbUf1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="tbCidade1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="tbBairro1" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbUf" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbCidade" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbBairro" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -373,12 +381,12 @@
                     <Property name="text" type="java.lang.String" value="CEP:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbCep1">
+                <Component class="javax.swing.JTextField" name="tbCep">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbLogradouro1">
+                <Component class="javax.swing.JTextField" name="tbLogradouro">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel15">
                   <Properties>
@@ -390,19 +398,19 @@
                     <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbNumero1">
+                <Component class="javax.swing.JTextField" name="tbNumero">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbComplemento1">
+                <Component class="javax.swing.JTextField" name="tbComplemento">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel18">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Complemento:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbBairro1">
+                <Component class="javax.swing.JTextField" name="tbBairro">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
@@ -414,9 +422,9 @@
                     <Property name="text" type="java.lang.String" value="Cidade:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbCidade1">
+                <Component class="javax.swing.JTextField" name="tbCidade">
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cbUf1">
+                <Component class="javax.swing.JComboBox" name="cbUf">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="28">
@@ -481,22 +489,22 @@
                                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="cbGenero1" max="32767" attributes="0"/>
+                              <Component id="cbMedicos" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel22" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="tbCep2" min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="tbData" min="-2" pref="104" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tbCep3" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="tbHorario" min="-2" pref="78" max="-2" attributes="0"/>
                               <Component id="jLabel26" min="-2" pref="54" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel27" min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="tbCep4" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="tbValor" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -509,7 +517,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbGenero1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbMedicos" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -518,14 +526,14 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="tbCep3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tbCep4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tbHorario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tbValor" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tbCep2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tbData" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -539,12 +547,12 @@
                     <Property name="text" type="java.lang.String" value="Data:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbCep2">
+                <Component class="javax.swing.JTextField" name="tbData">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbCep3">
+                <Component class="javax.swing.JTextField" name="tbHorario">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
@@ -554,12 +562,12 @@
                     <Property name="text" type="java.lang.String" value="Hor&#xe1;rio:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="tbCep4">
+                <Component class="javax.swing.JTextField" name="tbValor">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbCep4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbValorActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel27">
@@ -572,13 +580,10 @@
                     <Property name="text" type="java.lang.String" value="Oftalmologista:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cbGenero1">
+                <Component class="javax.swing.JComboBox" name="cbMedicos">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="2">
-                        <StringItem index="0" value="MASCULINO"/>
-                        <StringItem index="1" value="FEMININO"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -601,12 +606,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="563" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="568" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="393" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="404" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

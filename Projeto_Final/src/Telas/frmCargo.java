@@ -1,6 +1,7 @@
 package Telas;
 
 import Modelos.Cargo;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class frmCargo extends javax.swing.JFrame {
