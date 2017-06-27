@@ -209,13 +209,15 @@ public class Funcionario extends Pessoa {
             if (Banco.leitor.next()) {
 
                 Funcionario func = new Funcionario();
-
                 Endereco endereco = new Endereco();
                 Cargo cargo = new Cargo();
 
+                func.setId(Banco.leitor.getInt("id_funcionario"));
                 endereco.setId(Banco.leitor.getInt("id_endereco"));
                 cargo.setId(Banco.leitor.getInt("id_cargo"));
 
+                func.setCargo(cargo);
+                func.setEndereco(endereco);
                 func.setNome(Banco.leitor.getString("nome"));
                 func.setCpf(Banco.leitor.getString("cpf"));
                 func.setGenero(Banco.leitor.getString("genero"));
@@ -234,8 +236,12 @@ public class Funcionario extends Pessoa {
             Validacoes.Mensagens.mostrarAviso(ex.toString());
         }
 
-        for (Funcionario f : oftamologistas) {
-            f.getCargo().carregar();
+        try {
+            for (Funcionario f : oftamologistas) {
+                f.getCargo().carregar();
+            }
+        } catch (Exception ex) {
+            Validacoes.Mensagens.mostrarAviso(ex.toString());
         }
 
         return oftamologistas;

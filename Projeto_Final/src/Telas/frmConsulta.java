@@ -104,10 +104,11 @@ public class frmConsulta extends javax.swing.JFrame {
         Consulta consulta = new Consulta();
         Cliente c = new Cliente();
         Endereco e = conveteParaObjEndereco();
+        consulta.setMedico(getOftamologista());
 
         consulta.setStatus("D");
         consulta.setData(Validacoes.Funcoes.getData(tbData.getText()));
-        consulta.setHorario(Time.valueOf(tbHorario.getText()));
+        consulta.setHorario(Validacoes.Funcoes.getTime(tbHorario.getText()));
         consulta.setValor(Double.parseDouble(tbValor.getText()));
         consulta.setMedico(oftamologistas.get(cbMedicos.getSelectedIndex()));
 
@@ -130,9 +131,15 @@ public class frmConsulta extends javax.swing.JFrame {
         return consulta;
     }
 
+    private Funcionario getOftamologista() {
+        return oftamologistas.get(cbMedicos.getSelectedIndex());
+    }
+
     private void cadastrarConsulta() {
         Consulta consulta = converteParaObj();
 
+        Validacoes.Mensagens.mostrarAviso("A");
+        
         consulta.getCliente().getEndereco().inserir();
         consulta.getCliente().inserir();
         consulta.inserir();
@@ -158,7 +165,17 @@ public class frmConsulta extends javax.swing.JFrame {
 
     private boolean validar() {
         if (tbNome.getText().isEmpty()) {
-            Validacoes.Mensagens.campoNaoPreenchido("Descrição");
+            Validacoes.Mensagens.campoNaoPreenchido("Nome");
+            return false;
+        }
+
+        if (tbData.getText().isEmpty()) {
+            Validacoes.Mensagens.campoNaoPreenchido("Data");
+            return false;
+        }
+
+        if (tbHorario.getText().isEmpty()) {
+            Validacoes.Mensagens.campoNaoPreenchido("Horario");
             return false;
         }
 
@@ -502,7 +519,7 @@ public class frmConsulta extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,8 +562,8 @@ public class frmConsulta extends javax.swing.JFrame {
                         .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPane1)))
-                .addContainerGap())
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
