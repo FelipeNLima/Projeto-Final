@@ -5,6 +5,7 @@ import Validacoes.Excecoes;
 import java.util.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Consulta implements ICadastro {
 
@@ -203,6 +204,61 @@ public class Consulta implements ICadastro {
         this.medico.carregar();
     }
     //</editor-fold>
+    
+    public static ArrayList<Consulta> filtrar(String chave, String pesquisa) {
+        ArrayList<Consulta> consulta = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT                    "
+                    + "     id_consulta,         "
+                    + "     consultas.id_cliente,          "
+                    + "     id_medico,           "
+                    + "     data,                "
+                    + "     horario,             "
+                    + "     valor,               "
+                    + "     status               "
+                    + "FROM                      "
+                    + "     consultas            "
+                    + "INNER JOIN clientes       "
+                    + "ON consultas.id_cliente = clientes.id_cliente "
+                    + "WHERE                     "
+                    + "     consultas.ativo = 1  "
+                    + "     AND                  "
+                    + "     " + chave + " LIKE '%" + pesquisa + "%'";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            if (Banco.leitor.next()) {
+                Consulta c = new Consulta();
+                c.cliente = new Cliente();
+                c.medico = new Funcionario();
+                c.setId(Banco.leitor.getInt("id_consulta"));
+                c.cliente.setId(Banco.leitor.getInt("id_cliente"));
+                c.medico.setId(Banco.leitor.getInt("id_medico"));
+                c.data = Validacoes.Funcoes.converterData(Banco.leitor.getDate("data"));
+                c.horario = Banco.leitor.getTime("horario");
+                c.valor = Banco.leitor.getDouble("valor");
+                c.status = Banco.leitor.getString("status");
+                c.ativo = true;
+                
+                consulta.add(c);
+            }
+            
+
+            Banco.cmd.close();            
+        } catch (SQLException ex) {
+            Validacoes.Mensagens.mostrarAviso(ex.toString());
+        }
+
+        for (Consulta c : consulta) {
+            c.getCliente().carregar();
+            c.getMedico().carregar();
+        }
+
+        return consulta;
+    }
 
     public static void trocar(Consulta consultaA, Consulta consultaB) {
         Consulta consultaTemp = consultaA;

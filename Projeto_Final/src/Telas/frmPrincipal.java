@@ -1,12 +1,62 @@
 package Telas;
 
+import Modelos.Consulta;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class frmPrincipal extends javax.swing.JFrame {
 
     public frmPrincipal() {
         initComponents();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(60);
+        carregarDadosTabela();
+    }
+    
+    private String getChave() {
+        int index = filtro.getSelectedIndex();
+
+        if (index == 0) {
+            return "clientes.nome";
+        } else if (index == 1) {
+            return "clientes.cpf";
+        } else if (index == 2) {
+            return "clientes.telefone";
+        } else if (index == 3) {
+            return "clientes.celular";
+        }
+
+        return "email";
+    }
+
+    private void carregarDadosTabela() {
+        carregarDados(tabela, getChave(), tbPesquisa.getText());
+    }
+
+    public static void carregarDados(JTable tabela) {
+        carregarDados(tabela, "clientes.nome", "");
+    }
+
+    public static void carregarDados(JTable tabela, String chave, String pesquisa) {
+        ArrayList<Consulta> lista = Consulta.filtrar(chave, pesquisa);
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.setRowCount(0);
+
+        for (Consulta c : lista) {
+            model.addRow(new Object[]{
+                c.getId(),
+                c.getData(),
+                c.getHorario(),
+                c.getCliente().getNome(),
+                c.getCliente().getCelular(),
+                c.getMedico().getNome(),  
+                c.getValor(),
+                c.getStatus()});
+        }
+
+        tabela.setModel(model);
     }
 
     @SuppressWarnings("unchecked")
@@ -14,7 +64,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        filtro = new javax.swing.JComboBox<>();
         tbPesquisa = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -31,16 +81,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Telefone", "Celular", "E-Mail" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Telefone", "Celular", "E-Mail" }));
+        filtro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                filtroActionPerformed(evt);
             }
         });
 
@@ -67,7 +117,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .addComponent(tbPesquisa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 118, Short.MAX_VALUE)
+                    .addComponent(filtro, javax.swing.GroupLayout.Alignment.TRAILING, 0, 118, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -79,7 +129,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -233,6 +283,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel9.setRequestFocusEnabled(false);
         jLabel9.setVerifyInputWhenFocusTarget(false);
         jLabel9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/icons/Cancel_32x32.png"))); // NOI18N
@@ -267,35 +322,35 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .addComponent(lbNovaConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Data", "Horário", "Cliente", "Celular", "Telefone", "Médico", "Valor", "Status"
+                "Código", "Data", "Horário", "Cliente", "Celular", "Médico", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(45);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(45);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(45);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(50);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(50);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
+        jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setMinWidth(45);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tabela.getColumnModel().getColumn(0).setMaxWidth(45);
+            tabela.getColumnModel().getColumn(1).setMinWidth(50);
+            tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tabela.getColumnModel().getColumn(1).setMaxWidth(50);
+            tabela.getColumnModel().getColumn(2).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setPreferredWidth(40);
         }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -363,16 +418,16 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lbformaDePagamentoMouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new Telas.frmFaturamento().setVisible(true);
+//        new Telas.frmFaturamento().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void tbPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPesquisaKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tbPesquisaKeyPressed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_filtroActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         new Telas.frmFuncionarioPrincipal().setVisible(true);
@@ -380,10 +435,28 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void lbNovaConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNovaConsultaMouseClicked
         Telas.frmConsulta fConsulta = new Telas.frmConsulta();
-        fConsulta.tabela = this.jTable1;
-        
+        fConsulta.tabela = this.tabela;
         fConsulta.setVisible(true);
     }//GEN-LAST:event_lbNovaConsultaMouseClicked
+    private void editar(){
+                int linha = tabela.getSelectedRow();
+
+        if (linha >= 0) {
+            int id = Integer.parseInt(tabela.getValueAt(linha, 0).toString());
+
+            Telas.frmConsulta fConsulta = new Telas.frmConsulta(id);
+            fConsulta.tabela = this.tabela;
+
+            fConsulta.setVisible(true);
+        }
+        else
+            Validacoes.Mensagens.linhaNaoSelecionada();
+}
+
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+       editar();
+    }//GEN-LAST:event_jLabel9MouseClicked
     public static void main(String args[]) {
         //</editor-fold>
 
@@ -395,7 +468,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> filtro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -409,10 +482,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbCargo;
     private javax.swing.JLabel lbNovaConsulta;
     private javax.swing.JLabel lbformaDePagamento;
+    private javax.swing.JTable tabela;
     public javax.swing.JTextField tbPesquisa;
     // End of variables declaration//GEN-END:variables
 }

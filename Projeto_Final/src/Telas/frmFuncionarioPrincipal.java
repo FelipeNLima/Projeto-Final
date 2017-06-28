@@ -12,25 +12,52 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
 
     public frmFuncionarioPrincipal() {
         initComponents();
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(60);
+        carregarDadosTabela();
     }
     
-        // <editor-fold defaultstate="collapsed" desc="CARREGAR">                          
+        // <editor-fold defaultstate="collapsed" desc="CARREGAR"> 
+    private String getChave() {
+        int index = cbfiltro.getSelectedIndex();
+
+        if (index == 0) {
+            return "nome";
+        } else if (index == 1) {
+            return "cpf";
+        } else if (index == 2) {
+            return "telefone";
+        } else if (index == 3) {
+            return "celular";
+        }
+
+        return "email";
+    }
+    
     public void carregarDadosTabela() {
-        carregarDados(tabela, tbPesquisa.getText());
+        carregarDados(tabela, getChave(), tbPesquisa.getText());
     }
 
-    public static void carregarDados(JTable tabela, String descricao) {
-        ArrayList<Cargo> lista = Cargo.filtrarPorDescricao(descricao);
+    public static void carregarDados(JTable tabela) {
+        carregarDados(tabela, "nome", "");
+    }
+    
+    
+
+    public static void carregarDados(JTable tabela, String chave, String pesquisa) {
+        ArrayList<Funcionario> lista = Funcionario.filtrar(chave, pesquisa);
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);
 
-        for (Cargo c : lista) {
+        for (Funcionario f : lista) {
             model.addRow(new Object[]{
-                c.getId(),
-                c.getDescricao()
-            });
+                f.getId(),
+                f.getNome(),
+                f.getGenero(),
+                f.getCargo().getDescricao(),
+                f.getTelefone(),
+                f.getCelular()});
         }
-        tabela.setModel(model);
+
     }
 
     // </editor-fold>
@@ -88,7 +115,7 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         tbPesquisa = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbfiltro = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
@@ -121,11 +148,11 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Descrição"
+                "Código", "Nome", "Gênero", "Cargo", "Telefone", "Celular"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -138,6 +165,11 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setMinWidth(45);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tabela.getColumnModel().getColumn(0).setMaxWidth(45);
+        }
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
@@ -166,7 +198,7 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar por"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Telefone", "Celular", "E-Mail" }));
+        cbfiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "Telefone", "Celular", "E-Mail" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,14 +206,14 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, 204, Short.MAX_VALUE)
+                .addComponent(cbfiltro, 0, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -238,7 +270,9 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaKeyPressed
 
     private void tbPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPesquisaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            carregarDadosTabela();
+        }
     }//GEN-LAST:event_tbPesquisaKeyPressed
 
 
@@ -275,7 +309,7 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btnEditar;
     protected javax.swing.JButton btnNovo;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbfiltro;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JPanel jPanel3;
     protected javax.swing.JScrollPane jScrollPane1;
