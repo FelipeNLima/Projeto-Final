@@ -39,10 +39,10 @@ public class Funcoes {
             return "";
         }
 
-        String horas = time.getHours() < 9 ? "0" : "";
+        String horas = time.getHours() < 10 ? "0" : "";
         horas += time.getHours();
 
-        String minutos = time.getMinutes() < 9 ? "0" : "";
+        String minutos = time.getMinutes() < 10 ? "0" : "";
         minutos += time.getMinutes();
 
         return horas + ":" + minutos;
