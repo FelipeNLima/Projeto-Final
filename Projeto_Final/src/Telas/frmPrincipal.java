@@ -385,6 +385,11 @@ public class frmPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         tabela.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tabelaKeyPressed(evt);
@@ -512,6 +517,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         remover();
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (evt.getClickCount() == 2) {
+            editar();
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
     public static void main(String args[]) {
         //</editor-fold>
 

@@ -167,6 +167,18 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
             tabela.getColumnModel().getColumn(0).setMinWidth(45);
             tabela.getColumnModel().getColumn(0).setPreferredWidth(45);
             tabela.getColumnModel().getColumn(0).setMaxWidth(45);
+            tabela.getColumnModel().getColumn(2).setMinWidth(45);
+            tabela.getColumnModel().getColumn(2).setPreferredWidth(45);
+            tabela.getColumnModel().getColumn(2).setMaxWidth(45);
+            tabela.getColumnModel().getColumn(3).setMinWidth(180);
+            tabela.getColumnModel().getColumn(3).setPreferredWidth(180);
+            tabela.getColumnModel().getColumn(3).setMaxWidth(180);
+            tabela.getColumnModel().getColumn(4).setMinWidth(80);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tabela.getColumnModel().getColumn(4).setMaxWidth(80);
+            tabela.getColumnModel().getColumn(5).setMinWidth(80);
+            tabela.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tabela.getColumnModel().getColumn(5).setMaxWidth(80);
         }
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
@@ -237,14 +249,17 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                 .addContainerGap())
         );
