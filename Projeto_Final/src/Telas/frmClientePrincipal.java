@@ -60,6 +60,7 @@ public class frmClientePrincipal extends javax.swing.JFrame {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="REMOVER, EDITAR E CADASTRAR">                          
     private void remover() {
         if (tabela.getSelectedRow() >= 0) {
@@ -83,6 +84,7 @@ public class frmClientePrincipal extends javax.swing.JFrame {
 
         if (linha >= 0) {
             int id = Integer.parseInt(tabela.getValueAt(linha, 0).toString());
+     
             Telas.frmCliente fCliente = new Telas.frmCliente(id);
             fCliente.tabela = this.tabela;
             fCliente.setVisible(true);

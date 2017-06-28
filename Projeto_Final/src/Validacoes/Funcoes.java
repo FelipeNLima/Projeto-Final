@@ -29,6 +29,16 @@ public class Funcoes {
         return new SimpleDateFormat("dd/MM/yyyy").format(data);
     }
 
+    public static String getTIme(Time time) {
+        String horas = time.getHours() < 9 ? "0" : "";
+        horas += time.getHours();
+
+        String minutos = time.getMinutes() < 9 ? "0" : "";
+        minutos += time.getMinutes();
+
+        return horas + ":" + minutos;
+    }
+
     public static Time getTime(String data) {
         String[] x = data.split(":");
 
@@ -36,9 +46,10 @@ public class Funcoes {
     }
 
     public static java.sql.Date converterData(java.util.Date dtUtil) {
-        if(dtUtil == null)
+        if (dtUtil == null) {
             return null;
-        
+        }
+
         java.sql.Date dtSql = new java.sql.Date(dtUtil.getTime());
         dtSql.setDate(dtUtil.getDate());
         dtSql.setMonth(dtUtil.getMonth());

@@ -62,6 +62,10 @@ public class frmConsulta extends javax.swing.JFrame {
 
         this.idEndereco = c.getEndereco().getId();
 
+        tbData.setText(Validacoes.Funcoes.getData(consulta.getData()));
+        tbHorario.setText(Validacoes.Funcoes.getTIme(consulta.getHorario()));
+        tbValor.setText(consulta.getValor() + "");
+        
         tbNome.setText(c.getNome());
         tbCpf.setText(c.getCpf());
         tbCep.setText(c.getCpf());
