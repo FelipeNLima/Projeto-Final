@@ -340,6 +340,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel7.setRequestFocusEnabled(false);
         jLabel7.setVerifyInputWhenFocusTarget(false);
         jLabel7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -503,6 +508,10 @@ public class frmPrincipal extends javax.swing.JFrame {
             remover();
         }
     }//GEN-LAST:event_tabelaKeyPressed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        remover();
+    }//GEN-LAST:event_jLabel7MouseClicked
     public static void main(String args[]) {
         //</editor-fold>
 
