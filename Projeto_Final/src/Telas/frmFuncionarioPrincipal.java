@@ -41,8 +41,6 @@ public class frmFuncionarioPrincipal extends javax.swing.JFrame {
         carregarDados(tabela, "nome", "");
     }
     
-    
-
     public static void carregarDados(JTable tabela, String chave, String pesquisa) {
         ArrayList<Funcionario> lista = Funcionario.filtrar(chave, pesquisa);
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();

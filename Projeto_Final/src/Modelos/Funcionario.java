@@ -38,6 +38,7 @@ public class Funcionario extends Pessoa {
     }
 
     //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="INSERIR, ATUALIZAR, REMOVER E CARREGAR POR ID">
     @Override
     public void inserir() {
@@ -200,13 +201,13 @@ public class Funcionario extends Pessoa {
                     + "    ativo                  "
                     + "FROM                       "
                     + "     funcionarios          "
-                    + "WHERE id_cargo = ?";
+                    + "WHERE id_cargo = ? AND ativo = 1";
 
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.cmd.setInt(1, 1);
             Banco.leitor = Banco.cmd.executeQuery();
 
-            if (Banco.leitor.next()) {
+            while (Banco.leitor.next()) {
 
                 Funcionario func = new Funcionario();
                 Endereco endereco = new Endereco();
@@ -252,5 +253,68 @@ public class Funcionario extends Pessoa {
         carregarPorId(this.id);
     }
 
-    // </editor-fold>
+    public static ArrayList<Funcionario> filtrar(String chave, String pesquisa) {
+        ArrayList<Funcionario> lista = new ArrayList<>();
+
+        try {
+            String query
+                    = "SELECT                     "
+                    + "     id_funcionario,       "
+                    + "     id_endereco,          "
+                    + "     id_cargo,             "
+                    + "     nome,                 "
+                    + "     cpf,                  "
+                    + "     genero,               "
+                    + "     data_de_nascimento,   "
+                    + "     celular,              "
+                    + "     telefone,             "
+                    + "     email,                "
+                    + "     salario,              "
+                    + "     data_de_admissao,     "
+                    + "    ativo                  "
+                    + "FROM                       "
+                    + "     funcionarios          "
+                    + "WHERE " + chave + " LIKE '%" + pesquisa + "%'";
+
+            Banco.cmd = Banco.getConexao().prepareStatement(query);
+            Banco.leitor = Banco.cmd.executeQuery();
+
+            while (Banco.leitor.next()) {
+
+                Funcionario func = new Funcionario();
+                Endereco endereco = new Endereco();
+                Cargo cargo = new Cargo();
+
+                func.setId(Banco.leitor.getInt("id_funcionario"));
+                endereco.setId(Banco.leitor.getInt("id_endereco"));
+                cargo.setId(Banco.leitor.getInt("id_cargo"));
+
+                func.setCargo(cargo);
+                func.setEndereco(endereco);
+                func.setNome(Banco.leitor.getString("nome"));
+                func.setCpf(Banco.leitor.getString("cpf"));
+                func.setGenero(Banco.leitor.getString("genero"));
+                func.setDataDeNascimento(Banco.leitor.getDate("data_de_nascimento"));
+                func.setCelular(Banco.leitor.getString("celular"));
+                func.setTelefone(Banco.leitor.getString("telefone"));
+                func.setEmail(Banco.leitor.getString("email"));
+                func.setSalario(Banco.leitor.getDouble("salario"));
+                func.setDataDeAdmissao(Banco.leitor.getDate("data_de_admissao"));
+                func.setAtivo(Banco.leitor.getByte("ativo") == 1);
+
+                lista.add(func);
+            }
+            Banco.cmd.close();
+        } catch (SQLException ex) {
+            Validacoes.Mensagens.mostrarAviso(ex.toString());
+        }
+
+        for (Funcionario f : lista) {
+            f.getCargo().carregar();
+        }
+
+        return lista;
+
+        // </editor-fold>
+    }
 }

@@ -6,13 +6,13 @@ import Modelos.Funcionario;
 import java.util.ArrayList;
 import javax.swing.JTable;
 
-
 public class frmFuncionario extends javax.swing.JFrame {
 
     public JTable tabela;
     private boolean cadastrar;
     private int id;
-    
+    private int idEndereco;
+
     ArrayList<Cargo> lista;
 
     public frmFuncionario() {
@@ -26,8 +26,8 @@ public class frmFuncionario extends javax.swing.JFrame {
         initComponents();
         CarregarCargo();
         this.id = id;
-       CarregarDados();
-       cadastrar = false;
+        CarregarDados();
+        cadastrar = false;
         setTitle("Editar Funcionario");
     }
 
@@ -35,7 +35,7 @@ public class frmFuncionario extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }
-    
+
     private boolean validar() {
         if (tbNome.getText().isEmpty()) {
             Validacoes.Mensagens.campoNaoPreenchido("Descrição");
@@ -44,24 +44,20 @@ public class frmFuncionario extends javax.swing.JFrame {
 
         return true;
     }
-    
-    private void CarregarCargo()       
-    {       
+
+    private void CarregarCargo() {
         lista = Cargo.carregarTodos();
-         
+
         cbCargo.removeAllItems();
-        
-        for (int i = 0; i < lista.size(); i++)
-        {
+
+        for (int i = 0; i < lista.size(); i++) {
             cbCargo.addItem(lista.get(i).getDescricao());
-        }  
+        }
     }
-    
-        
-    private void CarregarDados()
-    {
-        Funcionario f  = new Funcionario();
-        
+
+    private void CarregarDados() {
+        Funcionario f = new Funcionario();
+
         f.carregarPorId(id);
         tbNome.setText(f.getNome());
         tbCpf.setText(f.getCpf());
@@ -73,9 +69,10 @@ public class frmFuncionario extends javax.swing.JFrame {
         cbCargo.setSelectedItem(f.getCargo().getDescricao());
         tbDataAdmissao.setText(Validacoes.Funcoes.getData(f.getDataDeAdmissao()));
         tbsalario.setText(f.getSalario().toString());
-        
+
         Endereco e = f.getEndereco();
 
+        this.idEndereco = e.getId();
         tbCep.setText(e.getCep());
         tbCidade.setText(e.getCidade());
         tbBairro.setText(e.getBairro());
@@ -84,10 +81,11 @@ public class frmFuncionario extends javax.swing.JFrame {
         tbNumero.setText(e.getNumero());
         tbComplemento.setText(e.getComplemento());
     }
-    
+
     private Endereco converteParaObjEndereco() {
         Endereco e = new Endereco();
-        
+
+        e.setId(idEndereco);
         e.setCep(tbCep.getText());
         e.setCidade(tbCidade.getText());
         e.setBairro(tbBairro.getText());
@@ -95,17 +93,16 @@ public class frmFuncionario extends javax.swing.JFrame {
         e.setLogradouro(tbLogradouro.getText());
         e.setNumero(tbNumero.getText());
         e.setComplemento(tbComplemento.getText());
-        
+
         return e;
     }
-    
-    private Funcionario converteParaObjFuncionario()
-    {
+
+    private Funcionario converteParaObjFuncionario() {
         Funcionario f = new Funcionario();
         Endereco e = converteParaObjEndereco();
         String valor = tbsalario.getText();
 
-        
+        f.setId(id);
         f.setNome(tbNome.getText());
         f.setCpf(tbCpf.getText());
         f.setDataDeNascimento(Validacoes.Funcoes.getData(tbDataNascimento.getText()));
@@ -118,26 +115,24 @@ public class frmFuncionario extends javax.swing.JFrame {
         f.setSalario(valor.isEmpty() ? 0 : Double.parseDouble(valor));
         f.setEndereco(e);
         f.setAtivo(true);
-          
-        
-        
+
         return f;
-        
     }
-    
+
     private void mantemDados() {
         Funcionario f = converteParaObjFuncionario();
 
         if (cadastrar) {
             f.getEndereco().inserir();
             f.inserir();
-            
+
         } else {
             f.getEndereco().atualizar();
             f.atualizar();
         }
+
+        frmFuncionarioPrincipal.carregarDados(tabela);
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -522,16 +517,14 @@ public class frmFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        fechar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-       
+
     }//GEN-LAST:event_cbCargoActionPerformed
 
-
     public static void main(String args[]) {
-        
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

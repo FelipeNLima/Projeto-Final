@@ -26,10 +26,19 @@ public class Funcoes {
     }
 
     public static String getData(Date data) {
-        return new SimpleDateFormat("dd/MM/yyyy").format(data);
+        if (data != null) {
+            return new SimpleDateFormat("dd/MM/yyyy").format(data);
+        } else {
+            return "";
+        }
     }
 
     public static String getTIme(Time time) {
+
+        if (time == null) {
+            return "";
+        }
+
         String horas = time.getHours() < 9 ? "0" : "";
         horas += time.getHours();
 

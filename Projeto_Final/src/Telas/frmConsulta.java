@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 
 public class frmConsulta extends javax.swing.JFrame {
-
+    
     public JTable tabela;
     private boolean cadastrar;
     private ArrayList<Funcionario> oftamologistas = new ArrayList<>();
     private int id;
     private int idCliente;
     private int idEndereco;
-
+    
     public frmConsulta() {
         initComponents();
         cadastrar = true;
         setTitle("Cadastrar Consulta");
         carregarOftamologista();
     }
-
+    
     public frmConsulta(int id) {
         initComponents();
         this.id = id;
@@ -32,36 +32,37 @@ public class frmConsulta extends javax.swing.JFrame {
         carregarOftamologista();
         carregarDados();
     }
-
+    
     private void fechar() {
         dispose();
     }
-
+    
     private void carregarOftamologista() {
         oftamologistas = Funcionario.carregarOftamologistas();
-
+        
         for (Funcionario medico : oftamologistas) {
             cbMedicos.addItem(medico.getNome());
         }
     }
-
+    
     private int getIndexOftamologista(int idMedico) {
         for (int i = 0; i < oftamologistas.size(); i++) {
             if (oftamologistas.get(i).getId() == idMedico) {
                 return i;
             }
         }
-
+        
         return -1;
     }
-
+    
     private void carregarDados() {
         Consulta consulta = new Consulta();
         consulta.carregarPorId(id);
         Cliente c = consulta.getCliente();
-
+        
+        this.idCliente = c.getId();
         this.idEndereco = c.getEndereco().getId();
-
+        
         tbData.setText(Validacoes.Funcoes.getData(consulta.getData()));
         tbHorario.setText(Validacoes.Funcoes.getTIme(consulta.getHorario()));
         tbValor.setText(consulta.getValor() + "");
@@ -73,7 +74,7 @@ public class frmConsulta extends javax.swing.JFrame {
         cbGenero.setSelectedIndex(c.getGenero().equals("M") ? 0 : 1);
         tbCelular.setText(c.getCelular());
         tbTelefone.setText(c.getTelefone());
-
+        
         Endereco e = c.getEndereco();
         tbCep.setText(e.getCep());
         tbCidade.setText(e.getCidade());
@@ -82,17 +83,17 @@ public class frmConsulta extends javax.swing.JFrame {
         tbNumero.setText(e.getNumero());
         tbComplemento.setText(e.getComplemento());
         cbUf.setSelectedItem(e.getUf());
-
+        
         int index = getIndexOftamologista(consulta.getMedico().getId());
-
+        
         if (index >= 0) {
             cbMedicos.setSelectedIndex(index);
         }
     }
-
+    
     private Endereco conveteParaObjEndereco() {
         Endereco e = new Endereco();
-
+        
         e.setCep(tbCep.getText());
         e.setUf(cbUf.getSelectedItem().toString());
         e.setCidade(tbCidade.getText());
@@ -100,25 +101,26 @@ public class frmConsulta extends javax.swing.JFrame {
         e.setLogradouro(tbLogradouro.getText());
         e.setNumero(tbNumero.getText());
         e.setComplemento(tbComplemento.getText());
-
+        
         return e;
     }
-
+    
     private Consulta converteParaObj() {
         Consulta consulta = new Consulta();
         Cliente c = new Cliente();
         Endereco e = conveteParaObjEndereco();
         consulta.setMedico(getOftamologista());
-
+        
         consulta.setStatus("D");
         consulta.setData(Validacoes.Funcoes.getData(tbData.getText()));
         consulta.setHorario(Validacoes.Funcoes.getTime(tbHorario.getText()));
         consulta.setValor(Double.parseDouble(tbValor.getText()));
         consulta.setMedico(oftamologistas.get(cbMedicos.getSelectedIndex()));
-
-        c.setId(id);
+        
+        consulta.setId(id);
+        c.setId(idCliente);
         e.setId(idEndereco);
-
+        
         c.setNome(tbNome.getText());
         c.setCpf(tbCpf.getText());
         c.setGenero(cbGenero.getSelectedIndex() == 0 ? "M" : "F");
@@ -128,64 +130,62 @@ public class frmConsulta extends javax.swing.JFrame {
         c.setEmail(tbEmail.getText());
         c.setEndereco(e);
         c.setAtivo(true);
-
+        
         consulta.setAtivo(true);
         consulta.setCliente(c);
-
+        
         return consulta;
     }
-
+    
     private Funcionario getOftamologista() {
         return oftamologistas.get(cbMedicos.getSelectedIndex());
     }
-
+    
     private void cadastrarConsulta() {
         Consulta consulta = converteParaObj();
-
-        Validacoes.Mensagens.mostrarAviso("A");
         
         consulta.getCliente().getEndereco().inserir();
         consulta.getCliente().inserir();
         consulta.inserir();
     }
-
+    
     private void atualizarConsulta() {
         Consulta consulta = converteParaObj();
-
+        
         consulta.getCliente().getEndereco().atualizar();
         consulta.getCliente().atualizar();
         consulta.atualizar();
     }
-
+    
     private void mantemDados() {
         if (cadastrar) {
             cadastrarConsulta();
         } else {
             atualizarConsulta();
         }
-
-        frmClientePrincipal.carregarDados(tabela);
+        
+        frmPrincipal.carregarDados(tabela);
     }
-
+    
     private boolean validar() {
         if (tbNome.getText().isEmpty()) {
             Validacoes.Mensagens.campoNaoPreenchido("Nome");
             return false;
         }
-
+        
         if (tbData.getText().isEmpty()) {
             Validacoes.Mensagens.campoNaoPreenchido("Data");
             return false;
         }
-
+        
         if (tbHorario.getText().isEmpty()) {
             Validacoes.Mensagens.campoNaoPreenchido("Horario");
             return false;
         }
-
+        
         return true;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -291,7 +291,7 @@ public class frmConsulta extends javax.swing.JFrame {
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbEmail))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +451,7 @@ public class frmConsulta extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel28)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 147, Short.MAX_VALUE))
                     .addComponent(cbMedicos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,14 +496,11 @@ public class frmConsulta extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(3, 3, 3)))
-                .addGap(24, 24, 24))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +520,7 @@ public class frmConsulta extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 574, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,27 +555,26 @@ public class frmConsulta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(354, 354, 354)
+                        .addGap(0, 379, Short.MAX_VALUE)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Dados da Consulta");
@@ -601,7 +597,7 @@ public class frmConsulta extends javax.swing.JFrame {
     private void tbValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbValorActionPerformed
 
     }//GEN-LAST:event_tbValorActionPerformed
-
+    
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

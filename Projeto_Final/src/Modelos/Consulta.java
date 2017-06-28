@@ -230,7 +230,7 @@ public class Consulta implements ICadastro {
             Banco.cmd = Banco.getConexao().prepareStatement(query);
             Banco.leitor = Banco.cmd.executeQuery();
 
-            if (Banco.leitor.next()) {
+            while (Banco.leitor.next()) {
                 Consulta c = new Consulta();
                 c.cliente = new Cliente();
                 c.medico = new Funcionario();

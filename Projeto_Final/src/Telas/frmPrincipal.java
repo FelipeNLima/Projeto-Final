@@ -1,8 +1,11 @@
 package Telas;
 
+import Modelos.Cliente;
 import Modelos.Consulta;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,7 +17,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         tabela.getColumnModel().getColumn(0).setPreferredWidth(60);
         carregarDadosTabela();
     }
-    
+
     private String getChave() {
         int index = filtro.getSelectedIndex();
 
@@ -47,16 +50,55 @@ public class frmPrincipal extends javax.swing.JFrame {
         for (Consulta c : lista) {
             model.addRow(new Object[]{
                 c.getId(),
-                c.getData(),
-                c.getHorario(),
+                Validacoes.Funcoes.getData(c.getData()),
+                Validacoes.Funcoes.getTIme(c.getHorario()),
                 c.getCliente().getNome(),
                 c.getCliente().getCelular(),
-                c.getMedico().getNome(),  
+                c.getMedico().getNome(),
                 c.getValor(),
                 c.getStatus()});
         }
 
         tabela.setModel(model);
+    }
+
+    private void cadastrar() {
+        Telas.frmConsulta fConsulta = new Telas.frmConsulta();
+        fConsulta.tabela = this.tabela;
+        fConsulta.setVisible(true);
+    }
+
+    private void editar() {
+        int linha = tabela.getSelectedRow();
+
+        if (linha >= 0) {
+            int id = Integer.parseInt(tabela.getValueAt(linha, 0).toString());
+
+            Telas.frmConsulta fConsulta = new Telas.frmConsulta(id);
+            fConsulta.tabela = this.tabela;
+
+            fConsulta.setVisible(true);
+        } else {
+            Validacoes.Mensagens.linhaNaoSelecionada();
+        }
+    }
+
+    private void remover() {
+        if (tabela.getSelectedRow() >= 0) {
+            int op = Validacoes.Mensagens.mostrarDesejaRemover();
+
+            if (op == JOptionPane.YES_OPTION) {
+                int index = tabela.getSelectedRow();
+                int id = Integer.parseInt(tabela.getValueAt(index, 0).toString());
+
+                Consulta c = new Consulta();
+                c.carregarPorId(id);
+                c.remover();
+                carregarDadosTabela();
+            }
+        } else {
+            Validacoes.Mensagens.linhaNaoSelecionada();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -324,10 +366,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Data", "Horário", "Cliente", "Celular", "Médico", "Valor", "Status"
@@ -341,16 +380,34 @@ public class frmPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabelaKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setMinWidth(45);
             tabela.getColumnModel().getColumn(0).setPreferredWidth(45);
             tabela.getColumnModel().getColumn(0).setMaxWidth(45);
-            tabela.getColumnModel().getColumn(1).setMinWidth(50);
-            tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
-            tabela.getColumnModel().getColumn(1).setMaxWidth(50);
-            tabela.getColumnModel().getColumn(2).setResizable(false);
-            tabela.getColumnModel().getColumn(2).setPreferredWidth(40);
+            tabela.getColumnModel().getColumn(1).setMinWidth(80);
+            tabela.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabela.getColumnModel().getColumn(1).setMaxWidth(80);
+            tabela.getColumnModel().getColumn(2).setMinWidth(80);
+            tabela.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tabela.getColumnModel().getColumn(2).setMaxWidth(80);
+            tabela.getColumnModel().getColumn(4).setMinWidth(120);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(120);
+            tabela.getColumnModel().getColumn(4).setMaxWidth(120);
+            tabela.getColumnModel().getColumn(5).setMinWidth(220);
+            tabela.getColumnModel().getColumn(5).setPreferredWidth(220);
+            tabela.getColumnModel().getColumn(5).setMaxWidth(220);
+            tabela.getColumnModel().getColumn(6).setMinWidth(120);
+            tabela.getColumnModel().getColumn(6).setPreferredWidth(120);
+            tabela.getColumnModel().getColumn(6).setMaxWidth(120);
+            tabela.getColumnModel().getColumn(7).setMinWidth(100);
+            tabela.getColumnModel().getColumn(7).setPreferredWidth(100);
+            tabela.getColumnModel().getColumn(7).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -405,7 +462,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbCargoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCargoMouseClicked
-        // TODO add your handling code here:
         new Telas.frmCargoPrincipal().setVisible(true);
     }//GEN-LAST:event_lbCargoMouseClicked
 
@@ -418,15 +474,16 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lbformaDePagamentoMouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-//        new Telas.frmFaturamento().setVisible(true);
+        new Telas.frmFaturamento().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void tbPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPesquisaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            carregarDadosTabela();
+        }
     }//GEN-LAST:event_tbPesquisaKeyPressed
 
     private void filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_filtroActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -434,29 +491,18 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void lbNovaConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNovaConsultaMouseClicked
-        Telas.frmConsulta fConsulta = new Telas.frmConsulta();
-        fConsulta.tabela = this.tabela;
-        fConsulta.setVisible(true);
+        cadastrar();
     }//GEN-LAST:event_lbNovaConsultaMouseClicked
-    private void editar(){
-                int linha = tabela.getSelectedRow();
-
-        if (linha >= 0) {
-            int id = Integer.parseInt(tabela.getValueAt(linha, 0).toString());
-
-            Telas.frmConsulta fConsulta = new Telas.frmConsulta(id);
-            fConsulta.tabela = this.tabela;
-
-            fConsulta.setVisible(true);
-        }
-        else
-            Validacoes.Mensagens.linhaNaoSelecionada();
-}
-
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-       editar();
+        editar();
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void tabelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            remover();
+        }
+    }//GEN-LAST:event_tabelaKeyPressed
     public static void main(String args[]) {
         //</editor-fold>
 
